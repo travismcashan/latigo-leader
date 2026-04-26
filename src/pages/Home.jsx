@@ -4,10 +4,7 @@ import { createPageUrl } from "@/utils";
 import PageComingSoon from "../components/PageComingSoon";
 import FadeInOnScroll from "../components/FadeInOnScroll";
 import DiscoveryCallModal from "../components/DiscoveryCallModal";
-
 import TestimonialCarousel from "../components/TestimonialCarousel";
-import { base44 } from "@/api/base44Client";
-import { useQuery } from "@tanstack/react-query";
 
 
 export default function Home() {
@@ -30,7 +27,7 @@ export default function Home() {
       { name: "keywords", content: "strategic planning, leadership consulting, StratOp, LifePlan, executive coaching, organizational leadership" },
       { property: "og:title", content: "Latigo Leadership Consulting | Securing Vision to Action" },
       { property: "og:description", content: "We help leaders and organizations align strategy with execution — so the plan holds, the team moves, and real progress begins." },
-      { property: "og:image", content: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/dec3d56ca_latigo-logo-hires.png" },
+      { property: "og:image", content: "/images/latigo-logo.png" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Latigo Leadership Consulting" },
@@ -57,7 +54,7 @@ export default function Home() {
           "name": "Latigo Leadership Consulting",
           "url": "https://latigoleader.com",
           "email": "hello@latigoleader.com",
-          "logo": "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/dec3d56ca_latigo-logo-hires.png"
+          "logo": "/images/latigo-logo.png"
         }
       },
       {
@@ -125,85 +122,36 @@ export default function Home() {
   }, []);
 
   const heroSectionRef = useRef(null);
-  const stratOpVideoRef = useRef(null);
-  const lifePlanVideoRef = useRef(null);
   const ctaVideoRef = useRef(null);
   const [heroVideoLoaded, setHeroVideoLoaded] = useState(false);
-  const [stratOpVideoLoaded, setStratOpVideoLoaded] = useState(false);
-  const [lifePlanVideoLoaded, setLifePlanVideoLoaded] = useState(false);
   const [ctaVideoLoaded, setCtaVideoLoaded] = useState(false);
 
-  const { data: videos = [] } = useQuery({
-    queryKey: ["videos"],
-    queryFn: () => base44.entities.Video.list(),
-  });
+  const heroVideos = [
+    {
+      src: "/videos/stratop-montage.mp4",
+      poster: "/images/stratop-first-frame.jpg",
+    },
+    {
+      src: "/videos/lifeplan-montage.mp4",
+      poster: "/images/lifeplan-first-frame.png",
+    },
+  ];
+  const [heroVideoIndex, setHeroVideoIndex] = useState(() => Math.floor(Math.random() * heroVideos.length));
+  const heroVideo = heroVideos[heroVideoIndex];
 
-  const stratOpVideo = videos.find(v => v.title.toLowerCase() === "stratop-montage-better-quality");
-  const lifePlanVideo = videos.find(v => v.title.toLowerCase() === "lifeplan-montage-latigo");
-  const horsesVideo = videos.find(v => v.title.toLowerCase().includes("horses"));
-
-  const [heroVideo, setHeroVideo] = useState(null);
-
-  useEffect(() => {
-    if (stratOpVideo || lifePlanVideo) {
-      const availableVideos = [stratOpVideo, lifePlanVideo].filter(Boolean);
-      const randomVideo = availableVideos[Math.floor(Math.random() * availableVideos.length)];
-      setHeroVideo(randomVideo);
-    }
-  }, [videos]);
-
-  // Load alternate video when scrolling below hero
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting && heroVideo) {
-          const otherVideo = heroVideo.title.toLowerCase() === "stratop-montage-better-quality" ? lifePlanVideo : stratOpVideo;
-          if (otherVideo) {
-            setHeroVideo(otherVideo);
-          }
+        if (!entry.isIntersecting) {
+          setHeroVideoIndex(prev => (prev + 1) % heroVideos.length);
+          setHeroVideoLoaded(false);
         }
       },
       { threshold: 0 }
     );
-
-    if (heroSectionRef.current) {
-      observer.observe(heroSectionRef.current);
-    }
-
+    if (heroSectionRef.current) observer.observe(heroSectionRef.current);
     return () => {
-      if (heroSectionRef.current) {
-        observer.unobserve(heroSectionRef.current);
-      }
-    };
-  }, [heroVideo, stratOpVideo, lifePlanVideo]);
-
-  // Scroll detection for videos
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.play();
-        } else {
-          entry.target.pause();
-        }
-      },
-      { threshold: 0.5 }
-    );
-    
-    if (stratOpVideoRef.current) {
-      observer.observe(stratOpVideoRef.current);
-    }
-    if (lifePlanVideoRef.current) {
-      observer.observe(lifePlanVideoRef.current);
-    }
-    
-    return () => {
-      if (stratOpVideoRef.current) {
-        observer.unobserve(stratOpVideoRef.current);
-      }
-      if (lifePlanVideoRef.current) {
-        observer.unobserve(lifePlanVideoRef.current);
-      }
+      if (heroSectionRef.current) observer.unobserve(heroSectionRef.current);
     };
   }, []);
 
@@ -253,38 +201,29 @@ export default function Home() {
 
       {/* ── 1. HERO ── */}
       <section ref={heroSectionRef} style={{ position: "relative", width: "100%", height: "100vh", minHeight: 600, overflow: "hidden", background: "#000" }}>
-        {heroVideo && (
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              backgroundImage: `url('${heroVideo.title.toLowerCase() === "stratop-montage-better-quality" ? "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/1649d69bc_stratop-montage-first-frame.jpg" : "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/f64ce316d_lifeplan-montage-first-frame.png"}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              opacity: heroVideoLoaded ? 0 : 1,
-              transition: "opacity 0.6s ease",
-            }}
-          />
-        )}
-        {heroVideo ? (
-          <video
-            src={heroVideo.file_url}
-            poster={heroVideo.title.toLowerCase() === "stratop-montage-better-quality" ? "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/1649d69bc_stratop-montage-first-frame.jpg" : "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/f64ce316d_lifeplan-montage-first-frame.png"}
-            muted
-            loop
-            autoPlay
-            playsInline
-            onCanPlay={() => setHeroVideoLoaded(true)}
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 50%", opacity: heroVideoLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
-          />
-        ) : (
-          <img
-            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/694181008_7A6B81F2-F6DF-48FF-A4AC-13EE14045B00_1_105_c.jpeg"
-            alt=""
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 50%" }}
-          />
-        )}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: `url('${heroVideo.poster}')`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            opacity: heroVideoLoaded ? 0 : 1,
+            transition: "opacity 0.6s ease",
+          }}
+        />
+        <video
+          key={heroVideo.src}
+          src={heroVideo.src}
+          poster={heroVideo.poster}
+          muted
+          loop
+          autoPlay
+          playsInline
+          onCanPlay={() => setHeroVideoLoaded(true)}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 50%", opacity: heroVideoLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
+        />
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.52)" }} />
         <div style={{ position: "absolute", inset: 0, background: theme === "teal" ? "rgba(42, 92, 90, 0.12)" : "rgba(191, 159, 75, 0.12)" }} />
         <div style={{
@@ -382,7 +321,7 @@ export default function Home() {
           <div className="blog-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0 40px" }}>
             {[
               {
-                img: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/6225854c5_868B594E-6B49-4DF5-B61F-7006343E8C36_1_105_c.jpg",
+                img: "/images/ceo-team.jpg",
                 title: "CEOs & Business Owners",
                 desc: "You built something real — but growth has outpaced your plan. We help leadership teams align vision with execution.",
                 link: "→ Explore StratOp",
@@ -390,7 +329,7 @@ export default function Home() {
                 imgFilter: "none",
               },
               {
-                img: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/354e1faf4_AdobeStock_575370721_Editorial_Use_Only.jpg",
+                img: "/images/church-leader.jpg",
                 title: "Pastors & Church Leaders",
                 desc: "The old playbook no longer fits the season you're in. We bring pastoral understanding to strategic planning.",
                 link: "→ Explore StratOp",
@@ -448,7 +387,7 @@ export default function Home() {
           <div className="float-block" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4vw", alignItems: "center" }}>
             <div style={{ overflow: "hidden", aspectRatio: "1/1" }}>
               <img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/49e1f77b8_7A6B81F2-F6DF-48FF-A4AC-13EE14045B00_1_105_c.jpeg"
+                src="/images/stratop-planning.jpeg"
                 alt=""
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", borderRadius: 8 }}
               />
@@ -505,7 +444,7 @@ export default function Home() {
             </div>
             <div style={{ overflow: "hidden", aspectRatio: "1/1" }}>
               <img
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/fc19f4ad4_IMG_4309.jpg"
+                src="/images/lifeplan-section.jpg"
                 alt=""
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", borderRadius: 8 }}
               />
@@ -542,7 +481,7 @@ export default function Home() {
           }}>
             {[
               {
-                image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/f9f694343_discovery-cropped.png",
+                image: "/images/discovery-icon.png",
                 label: "Discovery Call",
                 name: "Discovery Call",
                 desc: "We start with a conversation to understand where you are, what's working, and what needs to change. No pitch — just clarity on whether we're the right fit.",
@@ -550,7 +489,7 @@ export default function Home() {
                 linkPage: "Contact",
               },
               {
-                image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/571fb76aa_deliver-cropped-tweaked.png",
+                image: "/images/deliver-icon.png",
                 label: "The Intensive",
                 name: "The Intensive",
                 desc: "Through a multi-day facilitated process, we guide your team (or you, individually) through proven frameworks that surface truth, build alignment, and produce a strategic plan grounded in reality.",
@@ -558,7 +497,7 @@ export default function Home() {
                 linkPage: "Services",
               },
               {
-                image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/dd8d8768f_design-cropped.png",
+                image: "/images/design-icon.png",
                 label: "Sustained Movement",
                 name: "Sustained Movement",
                 desc: "The plan doesn't end when the intensive does. We provide follow-up coaching, quarterly reviews, and annual renewals to keep momentum alive and your strategy current.",
@@ -636,13 +575,13 @@ export default function Home() {
           }}>
             {[
               {
-                img: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/f6fb87058_jared.png",
+                img: "/images/jared.png",
                 name: "Jared Lyons",
                 title: "Co-Founder & Certified LifePlan Guide",
                 desc: "20+ years in ministry and leadership development. Jared helps individuals discover purpose and build a plan for the life they were created to live.",
               },
               {
-                img: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/24aa21852_dustin-new.png",
+                img: "/images/dustin.png",
                 name: "Dustin Sample",
                 title: "Co-Founder & Certified StratOp Champion",
                 desc: "21+ years of ministry, entrepreneurship, and organizational leadership. Dustin helps teams align vision with execution so the plan actually moves.",
@@ -695,21 +634,17 @@ export default function Home() {
         position: "relative",
         overflow: "hidden"
       }}>
-        {horsesVideo ? (
-          <video
-            ref={ctaVideoRef}
-            src={horsesVideo.file_url}
-            poster="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/f64ce316d_lifeplan-montage-first-frame.png"
-            muted
-            loop
-            autoPlay
-            playsInline
-            onCanPlay={() => setCtaVideoLoaded(true)}
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: ctaVideoLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
-          />
-        ) : (
-          <div style={{ position: "absolute", inset: 0, background: currentColors.ctaBackground }} />
-        )}
+        <video
+          ref={ctaVideoRef}
+          src="/videos/horses.mp4"
+          poster="/images/lifeplan-first-frame.png"
+          muted
+          loop
+          autoPlay
+          playsInline
+          onCanPlay={() => setCtaVideoLoaded(true)}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: ctaVideoLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
+        />
         <div style={{ position: "absolute", inset: 0, background: currentColors.ctaBackground, opacity: 0.88 }} />
         <div style={{ maxWidth: 1400, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <h2 style={{
@@ -750,11 +685,11 @@ export default function Home() {
       <section style={{ background: "#FFFFFF", padding: "4vmax 4vw 0 4vw", margin: 0 }}>
         <div className="gallery-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "16px" }}>
           {[
-            "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/1a2fd7d3c_1CF6BDEE-1E7C-40E1-962C-8871C32E9BC6_1_105_c.jpeg",
-            "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/1ae7a623a_9D7615FA-7FAB-4B6A-B12D-96C00DABE746_4_5005_c.jpeg",
-            "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/bfc8ea3d6_868B594E-6B49-4DF5-B61F-7006343E8C36_1_105_c.jpg",
-            "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/e82fecd96_76A7FBC6-4FFE-4B9F-B29F-C4F942F62CF6_1_105_c.jpeg",
-            "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/5438fec43_79DF707A-F44A-4081-84BE-276E82261425_1_105_c.jpg",
+            "/images/gallery-1.jpeg",
+            "/images/gallery-2.jpeg",
+            "/images/gallery-3.jpg",
+            "/images/gallery-4.jpeg",
+            "/images/gallery-5.jpg",
           ].map((src, idx) => (
             <div key={idx} className="gallery-item" style={{ aspectRatio: "16/9", overflow: "hidden", borderRadius: 8 }}>
               <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", brightness: "1.05", contrast: "1.1" }} />

@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import PageComingSoon from "./components/PageComingSoon";
 
-const LOGO_WHITE = "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/dec3d56ca_latigo-logo-hires.png";
+const LOGO_WHITE = "/images/latigo-logo.png";
 
 export default function Layout({ children, currentPageName }) {
   const [scrolled, setScrolled] = useState(false);
@@ -261,7 +261,6 @@ export default function Layout({ children, currentPageName }) {
           <div style={{ borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: "1.5rem", fontSize: "0.75rem", color: "rgba(0,0,0,0.4)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
             <div>
               <span>© 2025 Latigo Leadership Consulting. All rights reserved. </span>
-              <Link to={createPageUrl("VideoUploader")} style={{ color: "rgba(0,0,0,0.4)", fontSize: "0.75rem", textDecoration: "none" }}>Admin</Link>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
               <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
