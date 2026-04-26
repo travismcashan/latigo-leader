@@ -1,0 +1,785 @@
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
+import PageComingSoon from "../components/PageComingSoon";
+import FadeInOnScroll from "../components/FadeInOnScroll";
+import DiscoveryCallModal from "../components/DiscoveryCallModal";
+
+import TestimonialCarousel from "../components/TestimonialCarousel";
+import { base44 } from "@/api/base44Client";
+import { useQuery } from "@tanstack/react-query";
+
+
+export default function Home() {
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("latigo-theme") || "teal";
+  });
+  const [comingSoonOpen, setComingSoonOpen] = useState(false);
+  const [isLandingPage, setIsLandingPage] = useState(() => {
+    return localStorage.getItem("latigo-landing-mode") === "true";
+  });
+  const [discoveryModalOpen, setDiscoveryModalOpen] = useState(false);
+
+  // SEO Meta Tags and Structured Data
+  useEffect(() => {
+    // Update page title and meta tags
+    document.title = "Latigo Leadership Consulting | Strategic Planning & Personal Leadership";
+    
+    const metaTags = [
+      { name: "description", content: "Strategic planning and personal leadership intensives for executives. Certified StratOp and LifePlan facilitators helping leaders align vision with execution." },
+      { name: "keywords", content: "strategic planning, leadership consulting, StratOp, LifePlan, executive coaching, organizational leadership" },
+      { property: "og:title", content: "Latigo Leadership Consulting | Securing Vision to Action" },
+      { property: "og:description", content: "We help leaders and organizations align strategy with execution — so the plan holds, the team moves, and real progress begins." },
+      { property: "og:image", content: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/dec3d56ca_latigo-logo-hires.png" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Latigo Leadership Consulting" },
+      { name: "twitter:description", content: "Strategic planning and leadership development for executives and organizations." },
+    ];
+
+    metaTags.forEach(tag => {
+      let element = document.querySelector(`meta[${tag.property ? 'property' : 'name'}="${tag.property || tag.name}"]`);
+      if (!element) {
+        element = document.createElement("meta");
+        element.setAttribute(tag.property ? 'property' : 'name', tag.property || tag.name);
+        document.head.appendChild(element);
+      }
+      element.content = tag.content;
+    });
+
+    // Add JSON-LD structured data
+    const schemaScripts = [
+      {
+        id: "org-schema",
+        data: {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Latigo Leadership Consulting",
+          "url": "https://latigoleader.com",
+          "email": "hello@latigoleader.com",
+          "logo": "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/dec3d56ca_latigo-logo-hires.png"
+        }
+      },
+      {
+        id: "localbusiness-schema",
+        data: {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "Latigo Leadership Consulting",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "hello@latigoleader.com",
+            "contactType": "Customer Service"
+          }
+        }
+      },
+      {
+        id: "service-schema",
+        data: {
+          "@context": "https://schema.org",
+          "@type": ["Service", "AggregateOffer"],
+          "name": "Strategic Planning and Leadership Development",
+          "description": "StratOp and LifePlan intensives for organizational and personal leadership",
+          "provider": {
+            "@type": "Organization",
+            "name": "Latigo Leadership Consulting"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Leadership Services",
+            "itemListElement": [
+              {
+                "@type": "OfferCatalog",
+                "name": "StratOp",
+                "description": "Multi-day strategic planning intensive for leadership teams"
+              },
+              {
+                "@type": "OfferCatalog",
+                "name": "LifePlan",
+                "description": "Two-day personal leadership intensive covering five life domains"
+              }
+            ]
+          }
+        }
+      }
+    ];
+
+    schemaScripts.forEach(({ id, data }) => {
+      let script = document.getElementById(id);
+      if (!script) {
+        script = document.createElement("script");
+        script.id = id;
+        script.type = "application/ld+json";
+        document.head.appendChild(script);
+      }
+      script.innerHTML = JSON.stringify(data);
+    });
+
+    return () => {
+      // Cleanup schemas on unmount
+      schemaScripts.forEach(({ id }) => {
+        const script = document.getElementById(id);
+        if (script) script.remove();
+      });
+    };
+  }, []);
+
+  const heroSectionRef = useRef(null);
+  const stratOpVideoRef = useRef(null);
+  const lifePlanVideoRef = useRef(null);
+  const ctaVideoRef = useRef(null);
+  const [heroVideoLoaded, setHeroVideoLoaded] = useState(false);
+  const [stratOpVideoLoaded, setStratOpVideoLoaded] = useState(false);
+  const [lifePlanVideoLoaded, setLifePlanVideoLoaded] = useState(false);
+  const [ctaVideoLoaded, setCtaVideoLoaded] = useState(false);
+
+  const { data: videos = [] } = useQuery({
+    queryKey: ["videos"],
+    queryFn: () => base44.entities.Video.list(),
+  });
+
+  const stratOpVideo = videos.find(v => v.title.toLowerCase() === "stratop-montage-better-quality");
+  const lifePlanVideo = videos.find(v => v.title.toLowerCase() === "lifeplan-montage-latigo");
+  const horsesVideo = videos.find(v => v.title.toLowerCase().includes("horses"));
+
+  const [heroVideo, setHeroVideo] = useState(null);
+
+  useEffect(() => {
+    if (stratOpVideo || lifePlanVideo) {
+      const availableVideos = [stratOpVideo, lifePlanVideo].filter(Boolean);
+      const randomVideo = availableVideos[Math.floor(Math.random() * availableVideos.length)];
+      setHeroVideo(randomVideo);
+    }
+  }, [videos]);
+
+  // Load alternate video when scrolling below hero
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting && heroVideo) {
+          const otherVideo = heroVideo.title.toLowerCase() === "stratop-montage-better-quality" ? lifePlanVideo : stratOpVideo;
+          if (otherVideo) {
+            setHeroVideo(otherVideo);
+          }
+        }
+      },
+      { threshold: 0 }
+    );
+
+    if (heroSectionRef.current) {
+      observer.observe(heroSectionRef.current);
+    }
+
+    return () => {
+      if (heroSectionRef.current) {
+        observer.unobserve(heroSectionRef.current);
+      }
+    };
+  }, [heroVideo, stratOpVideo, lifePlanVideo]);
+
+  // Scroll detection for videos
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.play();
+        } else {
+          entry.target.pause();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    
+    if (stratOpVideoRef.current) {
+      observer.observe(stratOpVideoRef.current);
+    }
+    if (lifePlanVideoRef.current) {
+      observer.observe(lifePlanVideoRef.current);
+    }
+    
+    return () => {
+      if (stratOpVideoRef.current) {
+        observer.unobserve(stratOpVideoRef.current);
+      }
+      if (lifePlanVideoRef.current) {
+        observer.unobserve(lifePlanVideoRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const newTheme = localStorage.getItem("latigo-theme") || "teal";
+      const newMode = localStorage.getItem("latigo-landing-mode") === "true";
+      setTheme(newTheme);
+      setIsLandingPage(newMode);
+    };
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  const colors = {
+    teal: {
+      primary: "#2A5C5A",
+      primaryText: "#FFFFFF",
+      ctaBackground: "#2A5C5A",
+      ctaButtonBackground: "#FAF8F5",
+      ctaButtonText: "#2A5C5A",
+      secondary: "#D4874D",
+    },
+    copper: {
+      primary: "#bf9f4b",
+      primaryText: "#4f2c37",
+      ctaBackground: "#bf9f4b",
+      ctaButtonBackground: "#4f2c37",
+      ctaButtonText: "#bf9f4b",
+      secondary: "#2A5C5A",
+    },
+  };
+
+  const currentColors = colors[theme];
+
+  const handleLinkClick = (e, page) => {
+    if (page !== "Contact") {
+      e.preventDefault();
+      setComingSoonOpen(true);
+    }
+  };
+
+  return (
+    <div style={{ fontFamily: "'Inter', sans-serif", color: "#1A1A1A", background: "#FFFFFF" }}>
+      <PageComingSoon isOpen={comingSoonOpen} onClose={() => setComingSoonOpen(false)} />
+      <DiscoveryCallModal isOpen={discoveryModalOpen} onClose={() => setDiscoveryModalOpen(false)} />
+
+      {/* ── 1. HERO ── */}
+      <section ref={heroSectionRef} style={{ position: "relative", width: "100%", height: "100vh", minHeight: 600, overflow: "hidden", background: "#000" }}>
+        {heroVideo && (
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage: `url('${heroVideo.title.toLowerCase() === "stratop-montage-better-quality" ? "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/1649d69bc_stratop-montage-first-frame.jpg" : "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/f64ce316d_lifeplan-montage-first-frame.png"}')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              opacity: heroVideoLoaded ? 0 : 1,
+              transition: "opacity 0.6s ease",
+            }}
+          />
+        )}
+        {heroVideo ? (
+          <video
+            src={heroVideo.file_url}
+            poster={heroVideo.title.toLowerCase() === "stratop-montage-better-quality" ? "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/1649d69bc_stratop-montage-first-frame.jpg" : "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/f64ce316d_lifeplan-montage-first-frame.png"}
+            muted
+            loop
+            autoPlay
+            playsInline
+            onCanPlay={() => setHeroVideoLoaded(true)}
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 50%", opacity: heroVideoLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
+          />
+        ) : (
+          <img
+            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/694181008_7A6B81F2-F6DF-48FF-A4AC-13EE14045B00_1_105_c.jpeg"
+            alt=""
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 50%" }}
+          />
+        )}
+        <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.52)" }} />
+        <div style={{ position: "absolute", inset: 0, background: theme === "teal" ? "rgba(42, 92, 90, 0.12)" : "rgba(191, 159, 75, 0.12)" }} />
+        <div style={{
+          position: "absolute",
+          bottom: "8%",
+          left: 0,
+          right: 0,
+          padding: "0 4vw",
+        }}>
+          <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+            <h2 style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "clamp(3rem, 6vw, 5rem)",
+              fontWeight: 700,
+              color: "#FAF8F5",
+              lineHeight: 1.1,
+              margin: "0 0 1.2rem 0",
+            }}>
+              Securing Vision<br />to Action.
+            </h2>
+            <p style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "clamp(1.1rem, 1.8vw, 1.4rem)",
+              color: "rgba(250,248,245,0.88)",
+              lineHeight: 1.65,
+              margin: 0,
+              maxWidth: 580,
+            }}>
+              We help leaders and organizations align strategy with execution — so the plan holds, the team moves, and real progress begins.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 2. OUR APPROACH ── centered, cream bg */}
+      <FadeInOnScroll>
+      <section style={{ background: "#FAF8F5", padding: "9.9vmax 4vw", textAlign: "center" }}>
+        <div style={{ maxWidth: 860, margin: "0 auto" }}>
+          <h2 style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
+            fontWeight: 700,
+            color: "#1A1A1A",
+            lineHeight: 1.15,
+            margin: "0 0 1.5rem 0",
+          }}>
+            Proven frameworks.<br />Real forward movement.
+          </h2>
+          <p style={{
+            fontSize: "clamp(1rem, 1.6vw, 1.2rem)",
+            lineHeight: 1.75,
+            color: "#1A1A1A",
+            margin: "0 auto 3rem auto",
+            maxWidth: 780,
+          }}>
+            We are certified facilitators of the Paterson LifePlan and StratOp methodologies — proven strategic frameworks refined over decades of work with organizations ranging from Fortune 500 companies to churches and nonprofits. We guide individuals through personal LifePlan intensives and leadership teams through the StratOp process to create clarity, alignment, and sustained forward movement. Whether you're a CEO navigating growth, a pastor leading through transition, or an executive searching for purpose — we help you see clearly and plan strategically.
+          </p>
+          {!isLandingPage && (
+            <Link to={createPageUrl("About")} onClick={(e) => handleLinkClick(e, "About")} style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "0.85rem",
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            textDecoration: "none",
+            display: "inline-block",
+            padding: "14px 32px",
+            background: currentColors.primary,
+            color: "#FAF8F5",
+            borderRadius: 6,
+            transition: "background 0.3s ease",
+            }}>
+            Learn More
+            </Link>
+          )}
+        </div>
+      </section>
+      </FadeInOnScroll>
+
+      {/* ── 3. WHO WE WORK WITH ── cream, 3-col grid */}
+      {/* COMMENTED OUT
+      <FadeInOnScroll>
+      <section style={{ background: "#FAF8F5", padding: "6.6vmax 4vw" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <h2 style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
+            fontWeight: 700,
+            color: "#1A1A1A",
+            lineHeight: 1.15,
+            margin: "0 0 60px 0",
+            textAlign: "center",
+          }}>
+            Who We Work With
+          </h2>
+          <div className="blog-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0 40px" }}>
+            {[
+              {
+                img: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/6225854c5_868B594E-6B49-4DF5-B61F-7006343E8C36_1_105_c.jpg",
+                title: "CEOs & Business Owners",
+                desc: "You built something real — but growth has outpaced your plan. We help leadership teams align vision with execution.",
+                link: "→ Explore StratOp",
+                href: createPageUrl("Services"),
+                imgFilter: "none",
+              },
+              {
+                img: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/354e1faf4_AdobeStock_575370721_Editorial_Use_Only.jpg",
+                title: "Pastors & Church Leaders",
+                desc: "The old playbook no longer fits the season you're in. We bring pastoral understanding to strategic planning.",
+                link: "→ Explore StratOp",
+                href: createPageUrl("Services"),
+                imgFilter: "none",
+              },
+              {
+                img: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80",
+                title: "Leaders in Transition",
+                desc: "You've achieved a lot, but something shifted. A two-day intensive to stop drifting and start building with clarity.",
+                link: "→ Explore LifePlan",
+                href: createPageUrl("Services"),
+                imgFilter: "none",
+              },
+            ].map((card) => (
+              <div key={card.title} style={{ textAlign: "center" }}>
+                <div style={{ aspectRatio: "16/9", overflow: "hidden", marginBottom: "8%" }}>
+                  <img src={card.img} alt={card.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", filter: card.imgFilter, borderRadius: 8 }} />
+                </div>
+                <h4 style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: "1.35rem",
+                  fontWeight: 700,
+                  color: "#1A1A1A",
+                  lineHeight: 1.3,
+                  margin: "0 0 0.75rem 0",
+                  maxWidth: 280,
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}>
+                  {card.title}
+                </h4>
+                <p style={{ fontSize: "0.95rem", lineHeight: 1.6, color: "#555", marginBottom: "1rem", maxWidth: 300, marginLeft: "auto", marginRight: "auto" }}>{card.desc}</p>
+                <Link to={card.href} onClick={(e) => handleLinkClick(e, "Services")} style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.95rem",
+                  color: "#bf9f4b",
+                  textDecoration: "underline",
+                  fontWeight: 500,
+                }}>
+                  {card.link}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      </FadeInOnScroll>
+      */}
+
+      {/* ── 4. STRATEGIC PLANNING — image left, text right ── */}
+      <FadeInOnScroll>
+      <section style={{ background: "transparent", padding: "7.5vw 4vw" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <div className="float-block" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4vw", alignItems: "center" }}>
+            <div style={{ overflow: "hidden", aspectRatio: "1/1" }}>
+              <img
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/49e1f77b8_7A6B81F2-F6DF-48FF-A4AC-13EE14045B00_1_105_c.jpeg"
+                alt=""
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", borderRadius: 8 }}
+              />
+            </div>
+            <div style={{ padding: "3vw 2vw" }}>
+              <h2 style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
+                fontWeight: 700,
+                color: "#1A1A1A",
+                lineHeight: 1.1,
+                margin: "0 0 1.5rem 0",
+              }}>
+                Strategic Planning Your Team Owns.
+              </h2>
+              <p style={{ fontSize: "clamp(1rem, 1.6vw, 1.2rem)", lineHeight: 1.75, color: "#1A1A1A", margin: "0 0 1.75rem 0" }}>
+                StratOp is a multi-day facilitated intensive that brings your entire leadership team together to build a strategic plan grounded in reality — not theory. We start with perspective, surface the hard truths, clarify priorities, and walk out with a plan your team will actually follow. Because they built it together.
+              </p>
+              {!isLandingPage && (
+                <Link to={createPageUrl("Services")} onClick={(e) => handleLinkClick(e, "Services")} style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(1rem, 1.6vw, 1.2rem)", color: "#bf9f4b", textDecoration: "underline", fontWeight: 500 }}>
+                  Explore StratOp →
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+      </FadeInOnScroll>
+
+      {/* ── 5. LIFEPLAN — text left, image right ── */}
+      <FadeInOnScroll>
+      <section style={{ background: "#FAF8F5", padding: "7.5vw 4vw" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <div className="float-block lifeplan-block" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4vw", alignItems: "center" }}>
+            <div style={{ padding: "3vw 2vw" }}>
+              <h2 style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
+                fontWeight: 700,
+                color: "#1A1A1A",
+                lineHeight: 1.1,
+                margin: "0 0 1.5rem 0",
+              }}>
+                Clarity for the Life You're Building.
+              </h2>
+              <p style={{ fontSize: "clamp(1rem, 1.6vw, 1.2rem)", lineHeight: 1.75, color: "#1A1A1A", margin: "0 0 1.75rem 0" }}>
+                LifePlan is a two-day personal intensive designed for leaders who have achieved a lot — but aren't sure they're headed in the right direction. Through a guided process covering five life domains, you'll uncover purpose, name what's been holding you back, and build a strategic plan for the most important organization you'll ever lead — your own life.
+              </p>
+              {!isLandingPage && (
+                <Link to={createPageUrl("Services")} onClick={(e) => handleLinkClick(e, "Services")} style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(1rem, 1.6vw, 1.2rem)", color: "#bf9f4b", textDecoration: "underline", fontWeight: 500 }}>
+                  Explore LifePlan →
+                </Link>
+              )}
+            </div>
+            <div style={{ overflow: "hidden", aspectRatio: "1/1" }}>
+              <img
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/fc19f4ad4_IMG_4309.jpg"
+                alt=""
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", borderRadius: 8 }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      </FadeInOnScroll>
+
+      {/* ── 6. HOW WE WORK ── themed */}
+      <FadeInOnScroll>
+      <section style={{ background: theme === "teal" ? "#2A5C5A" : "#EDE9E3", padding: "9.9vmax 4vw" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", paddingBottom: 70 }}>
+            <h2 style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
+              fontWeight: 700,
+              color: theme === "teal" ? "#FFFFFF" : "#1A1A1A",
+              lineHeight: 1.15,
+              margin: 0,
+            }}>
+              How We Work
+            </h2>
+          </div>
+          <ul className="services-grid" style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "0 40px",
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: 0,
+            listStyle: "none",
+          }}>
+            {[
+              {
+                image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/f9f694343_discovery-cropped.png",
+                label: "Discovery Call",
+                name: "Discovery Call",
+                desc: "We start with a conversation to understand where you are, what's working, and what needs to change. No pitch — just clarity on whether we're the right fit.",
+                iconSize: 112,
+                linkPage: "Contact",
+              },
+              {
+                image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/571fb76aa_deliver-cropped-tweaked.png",
+                label: "The Intensive",
+                name: "The Intensive",
+                desc: "Through a multi-day facilitated process, we guide your team (or you, individually) through proven frameworks that surface truth, build alignment, and produce a strategic plan grounded in reality.",
+                iconSize: 160,
+                linkPage: "Services",
+              },
+              {
+                image: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/dd8d8768f_design-cropped.png",
+                label: "Sustained Movement",
+                name: "Sustained Movement",
+                desc: "The plan doesn't end when the intensive does. We provide follow-up coaching, quarterly reviews, and annual renewals to keep momentum alive and your strategy current.",
+                iconSize: 112,
+                linkPage: "Contact",
+              },
+            ].map((s) => {
+              return (
+              <li key={s.name} style={{ textAlign: "center", padding: "0 20px" }}>
+                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: 140, marginBottom: "1.25rem" }}><img src={s.image} alt={s.name} style={{ width: s.iconSize, height: s.iconSize, objectFit: "contain", filter: theme === "teal" ? "brightness(0) invert(1)" : "none" }} /></div>
+                <h3 style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: "1.5rem",
+                  fontWeight: 700,
+                  color: theme === "teal" ? "#FFFFFF" : "#1A1A1A",
+                  lineHeight: 1.3,
+                  margin: "0 0 0.75rem 0",
+                }}>{s.name}</h3>
+                <p style={{ fontSize: "1rem", lineHeight: 1.7, color: theme === "teal" ? "#FFFFFF" : "#1A1A1A" }}>{s.desc}</p>
+              </li>
+            );
+            })}
+          </ul>
+          <div style={{ textAlign: "center", marginTop: 70 }}>
+           <button onClick={() => setDiscoveryModalOpen(true)} style={{
+             fontFamily: "'Inter', sans-serif",
+             fontWeight: 500,
+             fontSize: "0.85rem",
+             letterSpacing: "0.1em",
+             textTransform: "uppercase",
+             textDecoration: "none",
+             display: "inline-block",
+             padding: "14px 32px",
+             borderRadius: 6,
+             background: theme === "teal" ? "transparent" : currentColors.primary,
+             color: "#FFFFFF",
+             border: theme === "teal" ? "1px solid #FFFFFF" : "none",
+             transition: "background 0.3s ease",
+             cursor: "pointer",
+           }}>Book a Discovery Call</button>
+          </div>
+        </div>
+      </section>
+      </FadeInOnScroll>
+
+      {/* ── 7. TESTIMONIAL ── always teal */}
+      <FadeInOnScroll>
+      <TestimonialCarousel />
+      </FadeInOnScroll>
+
+      {/* ── 8. MEET THE GUIDES ── cream */}
+      <FadeInOnScroll>
+      <section style={{ background: "#FAF8F5", padding: "9.9vmax 4vw" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", paddingBottom: 70 }}>
+            <h2 style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
+              fontWeight: 700,
+              color: "#1A1A1A",
+              lineHeight: 1.15,
+              margin: 0,
+            }}>
+              Meet the Guides
+            </h2>
+          </div>
+          <ul className="team-grid" style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            gap: "60px 80px",
+            maxWidth: 900,
+            margin: "0 auto",
+            padding: 0,
+            listStyle: "none",
+          }}>
+            {[
+              {
+                img: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/f6fb87058_jared.png",
+                name: "Jared Lyons",
+                title: "Co-Founder & Certified LifePlan Guide",
+                desc: "20+ years in ministry and leadership development. Jared helps individuals discover purpose and build a plan for the life they were created to live.",
+              },
+              {
+                img: "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/24aa21852_dustin-new.png",
+                name: "Dustin Sample",
+                title: "Co-Founder & Certified StratOp Champion",
+                desc: "21+ years of ministry, entrepreneurship, and organizational leadership. Dustin helps teams align vision with execution so the plan actually moves.",
+              },
+            ].map((m) => (
+              <li key={m.name} style={{ textAlign: "center" }}>
+                <div style={{ aspectRatio: "3/4", overflow: "hidden", marginBottom: "8%", maxWidth: 380, margin: "0 auto 8% auto" }}>
+                  <img src={m.img} alt={m.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 20%", display: "block", borderRadius: 8 }} />
+                </div>
+                <h3 style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: "1.5rem",
+                  fontWeight: 700,
+                  color: "#1A1A1A",
+                  lineHeight: 1.3,
+                  margin: "0 0 0.35rem 0",
+                }}>{m.name}</h3>
+                <p style={{ fontSize: "0.8rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#1f3d3c", marginBottom: "0.75rem" }}>{m.title}</p>
+                <p style={{ fontSize: "1rem", lineHeight: 1.7, color: "#1A1A1A" }}>{m.desc}</p>
+              </li>
+            ))}
+          </ul>
+          {!isLandingPage && (
+            <div style={{ textAlign: "center", marginTop: 70 }}>
+              <Link to={createPageUrl("About")} onClick={(e) => handleLinkClick(e, "About")} style={{
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 500,
+                fontSize: "0.85rem",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+                display: "inline-block",
+                padding: "14px 32px",
+                borderRadius: 6,
+                background: currentColors.primary,
+                color: "#FAF8F5",
+                transition: "background 0.3s ease",
+              }}>Our Story →</Link>
+            </div>
+          )}
+        </div>
+      </section>
+      </FadeInOnScroll>
+
+      {/* ── 9. BOTTOM CTA ── thematic */}
+      <FadeInOnScroll>
+      <section style={{ 
+        padding: "18vmax 4vw",
+        textAlign: "center",
+        position: "relative",
+        overflow: "hidden"
+      }}>
+        {horsesVideo ? (
+          <video
+            ref={ctaVideoRef}
+            src={horsesVideo.file_url}
+            poster="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/f64ce316d_lifeplan-montage-first-frame.png"
+            muted
+            loop
+            autoPlay
+            playsInline
+            onCanPlay={() => setCtaVideoLoaded(true)}
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: ctaVideoLoaded ? 1 : 0, transition: "opacity 0.6s ease" }}
+          />
+        ) : (
+          <div style={{ position: "absolute", inset: 0, background: currentColors.ctaBackground }} />
+        )}
+        <div style={{ position: "absolute", inset: 0, background: currentColors.ctaBackground, opacity: 0.88 }} />
+        <div style={{ maxWidth: 1400, margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <h2 style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
+            fontWeight: 700,
+            color: currentColors.primaryText,
+            lineHeight: 1.15,
+            margin: "0 0 2.5rem 0",
+            transition: "color 0.3s ease",
+          }}>
+            Ready to move forward?
+
+          </h2>
+          <button onClick={() => setDiscoveryModalOpen(true)} style={{
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: 500,
+            fontSize: "0.85rem",
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            textDecoration: "none",
+            display: "inline-block",
+            padding: "18px 48px",
+            borderRadius: 6,
+            background: currentColors.ctaButtonBackground,
+            color: currentColors.ctaButtonText,
+            transition: "background 0.3s ease, color 0.3s ease",
+            cursor: "pointer",
+            }}>
+            Book a Discovery Call
+          </button>
+        </div>
+      </section>
+      </FadeInOnScroll>
+
+      {/* ── 10. GALLERY ── white to match footer */}
+      <FadeInOnScroll>
+      <section style={{ background: "#FFFFFF", padding: "4vmax 4vw 0 4vw", margin: 0 }}>
+        <div className="gallery-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "16px" }}>
+          {[
+            "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/1a2fd7d3c_1CF6BDEE-1E7C-40E1-962C-8871C32E9BC6_1_105_c.jpeg",
+            "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/1ae7a623a_9D7615FA-7FAB-4B6A-B12D-96C00DABE746_4_5005_c.jpeg",
+            "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/bfc8ea3d6_868B594E-6B49-4DF5-B61F-7006343E8C36_1_105_c.jpg",
+            "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/e82fecd96_76A7FBC6-4FFE-4B9F-B29F-C4F942F62CF6_1_105_c.jpeg",
+            "https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/69aa3178e37ed2225a9bea65/5438fec43_79DF707A-F44A-4081-84BE-276E82261425_1_105_c.jpg",
+          ].map((src, idx) => (
+            <div key={idx} className="gallery-item" style={{ aspectRatio: "16/9", overflow: "hidden", borderRadius: 8 }}>
+              <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", brightness: "1.05", contrast: "1.1" }} />
+            </div>
+          ))}
+        </div>
+      </section>
+      </FadeInOnScroll>
+
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500&family=Lora:ital@1&display=swap');
+        
+
+        
+        @media (max-width: 768px) {
+          .float-block { grid-template-columns: 1fr !important; }
+          .float-block > div { order: auto !important; }
+          .lifeplan-block > div:last-child { order: -1 !important; }
+          .services-grid { grid-template-columns: 1fr !important; gap: 48px 0 !important; }
+          .team-grid { grid-template-columns: 1fr !important; gap: 40px 0 !important; }
+          .blog-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .gallery-grid { grid-template-columns: 1fr !important; }
+          .gallery-item:not(:first-child) { display: none !important; }
+        }
+      `}</style>
+    </div>
+  );
+}
