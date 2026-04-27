@@ -291,8 +291,9 @@ export default function Layout({ children, currentPageName }) {
         background: "#FFFFFF",
         paddingTop: "4rem",
         paddingBottom: "2.5rem",
+        padding: "4rem 4vw 2.5rem",
       }}>
-        <div style={{ padding: "0 4vw", maxWidth: 1400, margin: "0 auto" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", marginBottom: "3rem", alignItems: "flex-start" }}>
             {/* Left: Logo and tagline */}
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", width: "fit-content" }}>
