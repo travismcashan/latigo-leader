@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 
@@ -10,6 +10,12 @@ export default function Layout({ children, currentPageName }) {
   const location = useLocation();
 
   const isHomePage = currentPageName === "Home";
+
+  const allGalleryPhotos = Array.from({ length: 15 }, (_, i) => `/images/footer-gallery/${String(i + 1).padStart(2, "0")}.jpg`);
+  const galleryPhotos = useMemo(() => {
+    const shuffled = [...allGalleryPhotos].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 5);
+  }, [location.pathname]);
   const [theme, setTheme] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("latigo-theme") || "teal";
@@ -262,6 +268,17 @@ export default function Layout({ children, currentPageName }) {
       {/* Page Content */}
       <main>{children}</main>
 
+      {/* ── GALLERY ── */}
+      <section style={{ background: "#FFFFFF", padding: "4vw 4vw 0" }}>
+        <div className="gallery-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "16px" }}>
+          {galleryPhotos.map((src, idx) => (
+            <div key={idx} className="gallery-item" style={{ aspectRatio: "16/9", overflow: "hidden", borderRadius: 8 }}>
+              <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ── FOOTER ── white */}
       <footer style={{
         background: "#FFFFFF",
@@ -322,6 +339,8 @@ export default function Layout({ children, currentPageName }) {
           .footer-grid > div:nth-child(3) { display: none !important; }
           .footer-grid > div { text-align: left !important; }
           .footer-grid > div:first-child { align-self: flex-start !important; }
+          .gallery-grid { grid-template-columns: 1fr !important; }
+          .gallery-item:not(:first-child) { display: none !important; }
         }
         @media (min-width: 769px) {
           .mobile-burger { display: none !important; }

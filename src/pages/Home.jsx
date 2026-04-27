@@ -667,25 +667,6 @@ export default function Home() {
       </section>
       </FadeInOnScroll>
 
-      {/* ── 10. GALLERY ── white to match footer */}
-      <FadeInOnScroll>
-      <section style={{ background: "#FFFFFF", padding: "4vmax 4vw 0 4vw", margin: 0 }}>
-        <div className="gallery-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "16px" }}>
-          {[
-            "/images/gallery-1.jpeg",
-            "/images/gallery-2.jpeg",
-            "/images/jared-lifeplan.jpg",
-            "/images/gallery-4.jpeg",
-            "/images/gallery-5.jpg",
-          ].map((src, idx) => (
-            <div key={idx} className="gallery-item" style={{ aspectRatio: "16/9", overflow: "hidden", borderRadius: 8 }}>
-              <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", brightness: "1.05", contrast: "1.1" }} />
-            </div>
-          ))}
-        </div>
-      </section>
-      </FadeInOnScroll>
-
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500&family=Lora:ital@1&display=swap');
         
