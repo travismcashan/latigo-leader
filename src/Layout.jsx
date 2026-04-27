@@ -277,7 +277,7 @@ export default function Layout({ children, currentPageName }) {
 
       {/* ── GALLERY ── */}
       <section style={{ background: "#FFFFFF", padding: "4vw 4vw 0" }}>
-        <div className="gallery-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "16px" }}>
+        <div className="gallery-grid" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "16px", maxWidth: 1400, margin: "0 auto" }}>
           {galleryPhotos.map((src, idx) => (
             <div key={idx} className="gallery-item" style={{ aspectRatio: "16/9", overflow: "hidden", borderRadius: 8 }}>
               <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
@@ -292,7 +292,7 @@ export default function Layout({ children, currentPageName }) {
         paddingTop: "4rem",
         paddingBottom: "2.5rem",
       }}>
-        <div style={{ padding: "0 4vw" }}>
+        <div style={{ padding: "0 4vw", maxWidth: 1400, margin: "0 auto" }}>
           <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", marginBottom: "3rem", alignItems: "flex-start" }}>
             {/* Left: Logo and tagline */}
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", width: "fit-content" }}>
