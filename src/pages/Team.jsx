@@ -55,11 +55,11 @@ export default function Team() {
   }, []);
 
   const domains = [
-    { name: "Personal", desc: "Who are you at your core? What drives you, what drains you, and what patterns keep showing up?" },
-    { name: "Vocational", desc: "Is your work aligned with your calling —or are you building someone else's dream?" },
-    { name: "Family", desc: "Are you present and intentional in the relationships that matter most?" },
-    { name: "Community", desc: "How are you contributing beyond yourself —and where do you want to make your mark?" },
-    { name: "Faith", desc: "What anchors you? What is the deeper purpose your life is organized around?" },
+    { number: "01", name: "Personal", desc: "Who are you at your core? What drives you, what drains you, and what patterns keep showing up?" },
+    { number: "02", name: "Vocational", desc: "Is your work aligned with your calling — or are you building someone else's dream?" },
+    { number: "03", name: "Family", desc: "Are you present and intentional in the relationships that matter most?" },
+    { number: "04", name: "Community", desc: "How are you contributing beyond yourself — and where do you want to make your mark?" },
+    { number: "05", name: "Faith", desc: "What anchors you? What is the deeper purpose your life is organized around?" },
   ];
 
   const produces = [
@@ -187,16 +187,28 @@ export default function Team() {
             }}>
               {domains.map((domain) => (
                 <div key={domain.name} style={{
-                  padding: "2.5rem 2rem",
-                  borderTop: `3px solid ${accent}`,
+                  padding: "2.5rem",
                   background: "#FAF8F5",
+                  borderRadius: 8,
+                  textAlign: "center",
                 }}>
+                  <div style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: "2.5rem",
+                    fontWeight: 700,
+                    color: accent,
+                    lineHeight: 1,
+                    marginBottom: "0.75rem",
+                  }}>
+                    {domain.number}
+                  </div>
                   <h3 style={{
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: "1.5rem",
                     fontWeight: 700,
-                    color: primary,
-                    margin: "0 0 0.75rem 0",
+                    color: "#1A1A1A",
+                    lineHeight: 1.3,
+                    margin: "0 0 0.6rem 0",
                   }}>
                     {domain.name}
                   </h3>
@@ -245,7 +257,7 @@ export default function Team() {
                     border: "1px solid #FFFFFF",
                   }}
                 >
-                  Book a Call
+                  Contact Us
                 </Link>
               </div>
             </div>
@@ -267,6 +279,13 @@ export default function Team() {
             }}>
               What LifePlan Produces
             </h2>
+            <div style={{ overflow: "hidden", borderRadius: 8, marginBottom: "2.5rem" }}>
+              <img
+                src="/images/lifeplan-wall.jpg"
+                alt="LifePlan session wall with Turning Points, Core Values, and objectives"
+                style={{ width: "100%", height: "auto", display: "block" }}
+              />
+            </div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, textAlign: "left" }}>
               {produces.map((item, idx) => (
                 <li key={idx} style={{
@@ -291,32 +310,6 @@ export default function Team() {
                 </li>
               ))}
             </ul>
-          </div>
-        </section>
-      </FadeInOnScroll>
-
-      {/* PHOTO STRIP */}
-      <FadeInOnScroll>
-        <section style={{ padding: "0", overflow: "hidden" }}>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(5, 1fr)",
-            gap: "4px",
-          }}>
-            {selectedPhotos.map((src, idx) => (
-              <div key={idx} style={{ aspectRatio: "16/10", overflow: "hidden" }}>
-                <img
-                  src={src}
-                  alt=""
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
-                  }}
-                />
-              </div>
-            ))}
           </div>
         </section>
       </FadeInOnScroll>
@@ -437,20 +430,6 @@ export default function Team() {
             }}>
               Book a Discovery Call
             </Link>
-            <p style={{
-              fontSize: "0.85rem",
-              color: "rgba(255,255,255,0.75)",
-              marginTop: "1.5rem",
-              marginBottom: 0,
-            }}>
-              Or email us at{" "}
-              <a href="mailto:hello@latigoleadership.com" style={{
-                color: "#FFFFFF",
-                textDecoration: "underline",
-              }}>
-                hello@latigoleadership.com
-              </a>
-            </p>
           </div>
         </section>
       </FadeInOnScroll>

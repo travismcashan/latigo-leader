@@ -219,12 +219,13 @@ export default function Contact() {
                     />
                   </div>
                   <div style={fieldWrapStyle}>
-                    <label style={labelStyle}>Phone (optional)</label>
+                    <label style={labelStyle}>Phone</label>
                     <input
                       type="tel"
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
+                      required
                       placeholder="(555) 123-4567"
                       style={inputStyle}
                     />
@@ -249,12 +250,11 @@ export default function Contact() {
                     </select>
                   </div>
                   <div style={fieldWrapStyle}>
-                    <label style={labelStyle}>Message</label>
+                    <label style={labelStyle}>Comments or Questions</label>
                     <textarea
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      required
                       placeholder="Tell us a bit about what you're looking for..."
                       style={{
                         ...inputStyle,
@@ -287,7 +287,7 @@ export default function Contact() {
                     onMouseEnter={(e) => { if (!submitting) e.currentTarget.style.opacity = "0.85"; }}
                     onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
                   >
-                    {submitting ? "Sending..." : "Send Message"}
+                    {submitting ? "Sending..." : "Let's Get Started"}
                   </button>
                 </form>
               )}

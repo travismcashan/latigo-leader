@@ -182,7 +182,7 @@ export default function Layout({ children, currentPageName }) {
           </div>
 
           <Link to={createPageUrl("Contact")} className="btn-primary desktop-cta" style={{ background: "#bf9f4b", color: "#FAF8F5" }}>
-            Book a Call
+            Contact Us
           </Link>
 
           <button
@@ -249,7 +249,7 @@ export default function Layout({ children, currentPageName }) {
                 marginTop: "0.75rem",
               }}
             >
-              Book a Call
+              Contact Us
             </Link>
           </div>
         )}
