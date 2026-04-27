@@ -319,9 +319,8 @@ export default function Layout({ children, currentPageName }) {
               <div>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.5rem", fontWeight: 700, color: "#1A1A1A", marginBottom: "1rem", marginTop: "-0.3rem" }}>Questions?</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                  <Link to={createPageUrl("Contact")} style={{ fontSize: "0.95rem", color: "#1A1A1A", textDecoration: "none", lineHeight: 1.3 }}>Contact us</Link>
-                  <a href="mailto:dustin@latigoleader.com" style={{ fontSize: "0.95rem", color: "#1A1A1A", textDecoration: "none", lineHeight: 1.3 }}>dustin@latigoleader.com</a>
-                  <a href="mailto:jared@latigoleader.com" style={{ fontSize: "0.95rem", color: "#1A1A1A", textDecoration: "none", lineHeight: 1.3 }}>jared@latigoleader.com</a>
+                  <Link to={createPageUrl("About")} style={{ fontSize: "0.95rem", color: "#1A1A1A", textDecoration: "none", lineHeight: 1.3 }}>About Us</Link>
+                  <Link to={createPageUrl("Contact")} style={{ fontSize: "0.95rem", color: "#1A1A1A", textDecoration: "none", lineHeight: 1.3 }}>Contact Us</Link>
                 </div>
               </div>
             </div>
