@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import FadeInOnScroll from "@/components/FadeInOnScroll";
@@ -39,6 +39,21 @@ export default function Team() {
   const primary = theme === "teal" ? "#2A5C5A" : "#bf9f4b";
   const accent = theme === "teal" ? "#bf9f4b" : "#2A5C5A";
 
+  const allLifePlanPhotos = [
+    "/images/lifeplan-photos/01.jpg",
+    "/images/lifeplan-photos/02.jpg",
+    "/images/lifeplan-photos/03.jpg",
+    "/images/lifeplan-photos/04.jpg",
+    "/images/lifeplan-photos/05.jpg",
+    "/images/lifeplan-photos/06.jpg",
+    "/images/lifeplan-photos/07.jpg",
+    "/images/lifeplan-photos/08.jpg",
+  ];
+  const selectedPhotos = useMemo(() => {
+    const shuffled = [...allLifePlanPhotos].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 5);
+  }, []);
+
   const domains = [
     { name: "Personal", desc: "Who are you at your core? What drives you, what drains you, and what patterns keep showing up?" },
     { name: "Vocational", desc: "Is your work aligned with your calling —or are you building someone else's dream?" },
@@ -48,11 +63,11 @@ export default function Team() {
   ];
 
   const produces = [
-    "LifePlan Playbook —a comprehensive personal strategic plan covering all five life domains",
-    "LifePlan-on-a-Page —your entire plan distilled into one clear, actionable view",
-    "Clarity on purpose, calling, and the specific next steps for your current season",
-    "Freedom from past limitations that have been holding you back",
-    "A framework for ongoing self-evaluation and course correction",
+    { bold: "LifePlan Playbook", rest: "a comprehensive personal strategic plan covering all five life domains" },
+    { bold: "LifePlan-on-a-Page", rest: "your entire plan distilled into one clear, actionable view" },
+    { bold: "", rest: "Clarity on purpose, calling, and the specific next steps for your current season" },
+    { bold: "", rest: "Freedom from past limitations that have been holding you back" },
+    { bold: "", rest: "A framework for ongoing self-evaluation and course correction" },
   ];
 
   const testimonials = [
@@ -195,6 +210,44 @@ export default function Team() {
                   </p>
                 </div>
               ))}
+              <div style={{
+                padding: "2.5rem 2rem",
+                background: primary,
+                borderRadius: 8,
+                textAlign: "center",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}>
+                <h3 style={{
+                  fontFamily: "'DM Sans', sans-serif",
+                  fontSize: "1.5rem",
+                  fontWeight: 700,
+                  color: "#FFFFFF",
+                  margin: "0 0 1rem 0",
+                }}>
+                  Ready to start yours?
+                </h3>
+                <Link
+                  to={createPageUrl("Contact")}
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontWeight: 500,
+                    fontSize: "0.85rem",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    textDecoration: "none",
+                    padding: "12px 24px",
+                    borderRadius: 6,
+                    background: "transparent",
+                    color: "#FFFFFF",
+                    border: "1px solid #FFFFFF",
+                  }}
+                >
+                  Book a Call
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -221,7 +274,7 @@ export default function Team() {
                   lineHeight: 1.75,
                   color: "#1A1A1A",
                   marginBottom: "0.75rem",
-                  paddingLeft: "1.5rem",
+                  paddingLeft: "2rem",
                   position: "relative",
                 }}>
                   <span style={{
@@ -232,12 +285,38 @@ export default function Team() {
                     fontWeight: 700,
                     fontSize: "1.2rem",
                   }}>
-                    —
+                    ✓
                   </span>
-                  {item}
+                  {item.bold && <strong>{item.bold}</strong>}{item.bold ? " — " : ""}{item.rest}
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+      </FadeInOnScroll>
+
+      {/* PHOTO STRIP */}
+      <FadeInOnScroll>
+        <section style={{ padding: "0", overflow: "hidden" }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(5, 1fr)",
+            gap: "4px",
+          }}>
+            {selectedPhotos.map((src, idx) => (
+              <div key={idx} style={{ aspectRatio: "16/10", overflow: "hidden" }}>
+                <img
+                  src={src}
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
+              </div>
+            ))}
           </div>
         </section>
       </FadeInOnScroll>
