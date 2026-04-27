@@ -277,22 +277,20 @@ export default function Services() {
             <div style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr 1.2fr",
-              gridTemplateRows: "150px 150px",
-              gap: "8px",
+              gridTemplateRows: "140px 140px",
+              gap: "16px",
               marginBottom: "2.5rem",
-              borderRadius: 8,
-              overflow: "hidden",
             }}>
-              <div style={{ overflow: "hidden" }}>
+              <div style={{ borderRadius: 16, overflow: "hidden", minHeight: 0 }}>
                 <img src={selectedPhotos[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
-              <div style={{ overflow: "hidden" }}>
+              <div style={{ borderRadius: 16, overflow: "hidden", minHeight: 0 }}>
                 <img src={selectedPhotos[1]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
-              <div style={{ overflow: "hidden", gridRow: "1 / 3" }}>
+              <div style={{ borderRadius: 16, overflow: "hidden", minHeight: 0, gridRow: "1 / 3" }}>
                 <img src={selectedPhotos[2]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
-              <div style={{ overflow: "hidden", gridColumn: "1 / 3" }}>
+              <div style={{ borderRadius: 16, overflow: "hidden", minHeight: 0, gridColumn: "1 / 3" }}>
                 <img src={selectedPhotos[3]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
             </div>
@@ -338,7 +336,7 @@ export default function Services() {
               margin: "0 0 3rem 0",
               textAlign: "center",
             }}>
-              StratOp serves leaders at inflection points.
+              StratOp serves leaders<br />at inflection points.
             </h2>
             <div className="audience-grid" style={{
               display: "grid",
