@@ -53,7 +53,7 @@ export default function About() {
           position: "absolute", inset: 0,
           backgroundImage: "url('/images/stratop-planning.jpeg')",
           backgroundSize: "cover", backgroundPosition: "center",
-          filter: theme === "copper" ? "sepia(50%) saturate(85%) brightness(98%)" : "sepia(30%) saturate(70%) brightness(95%) hue-rotate(120deg)",
+          filter: theme === "copper" ? "sepia(20%) saturate(90%) brightness(98%)" : "sepia(8%) saturate(80%) brightness(96%)",
         }} />
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)" }} />
         <div style={{

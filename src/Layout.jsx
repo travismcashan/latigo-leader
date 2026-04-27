@@ -111,11 +111,11 @@ export default function Layout({ children, currentPageName }) {
 
         [data-theme="copper"] img:not([alt="Latigo"]):not([alt="Altrua HealthShare"]):not([data-no-tint]),
         [data-theme="copper"] video:not([data-no-tint]) {
-          filter: sepia(50%) saturate(85%) brightness(98%);
+          filter: sepia(20%) saturate(90%) brightness(98%);
         }
         [data-theme="teal"] img:not([alt="Latigo"]):not([alt="Altrua HealthShare"]):not([data-no-tint]),
         [data-theme="teal"] video:not([data-no-tint]) {
-          filter: sepia(30%) saturate(70%) brightness(95%) hue-rotate(120deg);
+          filter: sepia(8%) saturate(80%) brightness(96%);
         }
 
         .clove-nav-link {
