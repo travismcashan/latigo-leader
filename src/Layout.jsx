@@ -309,9 +309,8 @@ export default function Layout({ children, currentPageName }) {
                 <div>
                   <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.5rem", fontWeight: 700, color: "#1A1A1A", marginBottom: "1rem", marginTop: "-0.3rem" }}>How We Help</p>
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                    <Link to={createPageUrl("Services")} style={{ color: "#1A1A1A", fontSize: "0.95rem", textDecoration: "none", lineHeight: 1.3 }}>StratOp</Link>
-                    <Link to={createPageUrl("Team")} style={{ color: "#1A1A1A", fontSize: "0.95rem", textDecoration: "none", lineHeight: 1.3 }}>LifePlan</Link>
-                    <Link to={createPageUrl("Results")} style={{ color: "#1A1A1A", fontSize: "0.95rem", textDecoration: "none", lineHeight: 1.3 }}>Results</Link>
+                    <Link to={createPageUrl("Services")} style={{ color: "#1A1A1A", fontSize: "0.95rem", textDecoration: "none", lineHeight: 1.3 }}>StratOp for Organizations</Link>
+                    <Link to={createPageUrl("Team")} style={{ color: "#1A1A1A", fontSize: "0.95rem", textDecoration: "none", lineHeight: 1.3 }}>LifePlan for Individuals</Link>
                   </div>
                 </div>
               )}
