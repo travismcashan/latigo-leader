@@ -127,7 +127,7 @@ export default function Services() {
         display: "flex",
         alignItems: "flex-end",
       }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "url('/images/stratop-planning.jpeg')", backgroundSize: "cover", backgroundPosition: "center", filter: theme === "copper" ? "sepia(20%) saturate(90%) brightness(98%)" : "sepia(8%) saturate(80%) brightness(96%)" }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "url('/images/stratop-planning.jpeg')", backgroundSize: "cover", backgroundPosition: "center", filter: theme === "copper" ? "sepia(25%) saturate(90%) brightness(98%)" : "sepia(20%) saturate(80%) brightness(96%)" }} />
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)" }} />
         <div className="hero-content" style={{
           position: "relative",

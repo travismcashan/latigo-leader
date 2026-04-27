@@ -93,7 +93,7 @@ export default function Team() {
         alignItems: "flex-end",
         overflow: "hidden",
       }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "url('/images/lifeplan-wall.jpg')", backgroundSize: "cover", backgroundPosition: "center", filter: theme === "copper" ? "sepia(20%) saturate(90%) brightness(98%)" : "sepia(8%) saturate(80%) brightness(96%)" }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "url('/images/lifeplan-wall.jpg')", backgroundSize: "cover", backgroundPosition: "center", filter: theme === "copper" ? "sepia(25%) saturate(90%) brightness(98%)" : "sepia(20%) saturate(80%) brightness(96%)" }} />
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.45)" }} />
         <div style={{
           position: "relative",
