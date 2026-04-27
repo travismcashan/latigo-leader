@@ -75,7 +75,7 @@ export default function Contact() {
         }),
       });
       if (res.ok) {
-        navigate("/ThankYou");
+        navigate("/thankyou");
       } else {
         setError("Something went wrong. Please try again or email us directly.");
       }

@@ -8,17 +8,17 @@ import ThankYou from './pages/ThankYou';
 import __Layout from './Layout.jsx';
 
 export const PAGES = {
-    "Home": Home,
-    "About": About,
-    "Services": Services,
-    "Team": Team,
-    "Contact": Contact,
-    "Results": Results,
-    "ThankYou": ThankYou,
+    "home": Home,
+    "about": About,
+    "services": Services,
+    "team": Team,
+    "contact": Contact,
+    "results": Results,
+    "thankyou": ThankYou,
 }
 
 export const pagesConfig = {
-    mainPage: "Home",
+    mainPage: "home",
     Pages: PAGES,
     Layout: __Layout,
 };

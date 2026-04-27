@@ -9,7 +9,7 @@ export default function Layout({ children, currentPageName }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
 
-  const isHomePage = currentPageName === "Home";
+  const isHomePage = currentPageName === "home";
 
   const stratOpPhotos = Array.from({ length: 15 }, (_, i) => `/images/footer-gallery/${String(i + 1).padStart(2, "0")}.jpg`);
   const lifePlanPhotos = Array.from({ length: 10 }, (_, i) => `/images/wall-of-fame/${i + 1}a.jpg`);
@@ -90,10 +90,10 @@ export default function Layout({ children, currentPageName }) {
   );
 
   const navLinks = [
-    { label: "About", page: "About" },
-    { label: "StratOp", page: "Services" },
-    { label: "LifePlan", page: "Team" },
-    { label: "Results", page: "Results" },
+    { label: "About", page: "about" },
+    { label: "StratOp", page: "services" },
+    { label: "LifePlan", page: "team" },
+    { label: "Results", page: "results" },
   ];
 
   return (
