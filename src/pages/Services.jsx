@@ -126,10 +126,8 @@ export default function Services() {
         overflow: "hidden",
         display: "flex",
         alignItems: "flex-end",
-        backgroundImage: "url('/images/stratop-planning.jpeg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
       }}>
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "url('/images/stratop-planning.jpeg')", backgroundSize: "cover", backgroundPosition: "center", filter: "sepia(50%) saturate(85%) brightness(98%)" }} />
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)" }} />
         <div className="hero-content" style={{
           position: "relative",

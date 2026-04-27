@@ -109,7 +109,8 @@ export default function Layout({ children, currentPageName }) {
           background: #FAF8F5;
         }
 
-        main img:not([alt="Latigo"]):not([alt="Altrua HealthShare"]) {
+        img:not([alt="Latigo"]):not([alt="Altrua HealthShare"]):not([data-no-tint]),
+        video:not([data-no-tint]) {
           filter: sepia(50%) saturate(85%) brightness(98%);
         }
 

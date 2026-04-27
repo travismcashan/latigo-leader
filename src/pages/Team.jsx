@@ -91,12 +91,9 @@ export default function Team() {
         minHeight: "60vh",
         display: "flex",
         alignItems: "flex-end",
-        backgroundImage: "url('/images/lifeplan-wall.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
         overflow: "hidden",
       }}>
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "url('/images/lifeplan-wall.jpg')", backgroundSize: "cover", backgroundPosition: "center", filter: "sepia(50%) saturate(85%) brightness(98%)" }} />
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.45)" }} />
         <div style={{
           position: "relative",

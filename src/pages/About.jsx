@@ -53,6 +53,7 @@ export default function About() {
           position: "absolute", inset: 0,
           backgroundImage: "url('/images/stratop-planning.jpeg')",
           backgroundSize: "cover", backgroundPosition: "center",
+          filter: "sepia(50%) saturate(85%) brightness(98%)",
         }} />
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)" }} />
         <div style={{
@@ -166,7 +167,7 @@ export default function About() {
               gap: "4vw", alignItems: "center", marginBottom: "6vw",
             }}>
               <div style={{ overflow: "hidden" }}>
-                <img src="/images/jared.jpg" alt="Jared Lyons" style={{
+                <img src="/images/jared.jpg" alt="Jared Lyons" data-no-tint style={{
                   width: "100%", aspectRatio: "1/1", maxWidth: 420,
                   objectFit: "cover", objectPosition: "50% 20%",
                   display: "block", borderRadius: 8,
@@ -240,7 +241,7 @@ export default function About() {
                 </p>
               </div>
               <div style={{ overflow: "hidden" }}>
-                <img src="/images/dustin.jpg" alt="Dustin Sample" style={{
+                <img src="/images/dustin.jpg" alt="Dustin Sample" data-no-tint style={{
                   width: "100%", aspectRatio: "1/1", maxWidth: 420,
                   objectFit: "cover", objectPosition: "50% 20%",
                   display: "block", borderRadius: 8, marginLeft: "auto",

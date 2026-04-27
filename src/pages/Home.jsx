@@ -570,7 +570,7 @@ export default function Home() {
             ].map((m) => (
               <li key={m.name} style={{ textAlign: "center" }}>
                 <div style={{ aspectRatio: "1/1", overflow: "hidden", marginBottom: "8%", maxWidth: 380, margin: "0 auto 8% auto" }}>
-                  <img src={m.img} alt={m.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 20%", display: "block", borderRadius: 8 }} />
+                  <img src={m.img} alt={m.name} data-no-tint style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 20%", display: "block", borderRadius: 8 }} />
                 </div>
                 <h3 style={{
                   fontFamily: "'DM Sans', sans-serif",
