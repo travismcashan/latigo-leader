@@ -184,6 +184,7 @@ export default function Home() {
       {/* ── 1. HERO ── */}
       <section ref={heroSectionRef} style={{ position: "relative", width: "100%", height: "100vh", minHeight: 600, overflow: "hidden", background: "#000" }}>
         <div
+          className="hero-bg"
           style={{
             position: "absolute",
             inset: 0,

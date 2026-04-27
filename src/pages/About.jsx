@@ -49,11 +49,10 @@ export default function About() {
         alignItems: "center",
         justifyContent: "center",
       }}>
-        <div style={{
+        <div className="hero-bg" style={{
           position: "absolute", inset: 0,
           backgroundImage: "url('/images/stratop-planning.jpeg')",
           backgroundSize: "cover", backgroundPosition: "center",
-          filter: theme === "copper" ? "sepia(25%) saturate(90%) brightness(98%)" : "sepia(20%) saturate(80%) brightness(96%)",
         }} />
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)" }} />
         <div style={{
