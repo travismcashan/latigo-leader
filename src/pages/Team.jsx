@@ -70,6 +70,18 @@ export default function Team() {
     { bold: "", rest: "A framework for ongoing self-evaluation and course correction" },
   ];
 
+  const wallOfFame = [
+    { a: "/images/wall-of-fame/1a.jpg", b: "/images/wall-of-fame/1b.jpg" },
+    { a: "/images/wall-of-fame/2a.jpg", b: "/images/wall-of-fame/2b.jpg" },
+    { a: "/images/wall-of-fame/3a.jpg", b: "/images/wall-of-fame/3b.jpg" },
+    { a: "/images/wall-of-fame/4a.jpg", b: "/images/wall-of-fame/4b.jpg" },
+    { a: "/images/wall-of-fame/5a.jpg", b: "/images/wall-of-fame/5b.jpg" },
+    { a: "/images/wall-of-fame/6a.jpg", b: "/images/wall-of-fame/6b.jpg" },
+    { a: "/images/wall-of-fame/7a.jpg", b: "/images/wall-of-fame/7b.jpg" },
+    { a: "/images/wall-of-fame/8a.jpg", b: "/images/wall-of-fame/8b.jpg" },
+    { a: "/images/wall-of-fame/9a.jpg", b: "/images/wall-of-fame/9b.jpg" },
+  ];
+
   const testimonials = [
     {
       quote: "LifePlan gave me a sense of direction and peace in many aspects of my life. I'm now working to be the person I believe God has called me to be.",
@@ -352,7 +364,64 @@ export default function Team() {
         </section>
       </FadeInOnScroll>
 
-      {/* 6. TESTIMONIALS */}
+      {/* 6. WALL OF FAME */}
+      <FadeInOnScroll>
+        <section style={{ background: "#FFFFFF", padding: "6vw 4vw" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <h2 style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
+              fontWeight: 700,
+              color: "#1A1A1A",
+              lineHeight: 1.15,
+              margin: "0 0 0.75rem 0",
+              textAlign: "center",
+            }}>
+              The Wall
+            </h2>
+            <p style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "clamp(1rem, 1.6vw, 1.15rem)",
+              lineHeight: 1.75,
+              color: "#555",
+              margin: "0 0 3rem 0",
+              textAlign: "center",
+            }}>
+              Every plan starts with a conversation. Here's proof it works.
+            </p>
+            <div className="wall-of-fame-grid" style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 1fr)",
+              gap: "20px",
+            }}>
+              {wallOfFame.map((pair, idx) => (
+                <div key={idx} style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "6px",
+                }}>
+                  <div style={{ borderRadius: 8, overflow: "hidden" }}>
+                    <img
+                      src={pair.a}
+                      alt=""
+                      style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", objectPosition: "center top", display: "block" }}
+                    />
+                  </div>
+                  <div style={{ borderRadius: 8, overflow: "hidden" }}>
+                    <img
+                      src={pair.b}
+                      alt=""
+                      style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", objectPosition: "center top", display: "block" }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </FadeInOnScroll>
+
+      {/* 7. TESTIMONIALS */}
       <FadeInOnScroll>
         <section style={{ background: "#c5d0d6", padding: "6vw 4vw" }}>
           <div style={{
@@ -390,7 +459,7 @@ export default function Team() {
         </section>
       </FadeInOnScroll>
 
-      {/* 7. CTA */}
+      {/* 8. CTA */}
       <FadeInOnScroll>
         <section style={{
           background: primary,
@@ -443,6 +512,10 @@ export default function Team() {
         @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap');
         @media (max-width: 768px) {
           .lifeplan-domains-grid { grid-template-columns: 1fr !important; }
+          .wall-of-fame-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          .wall-of-fame-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </div>
