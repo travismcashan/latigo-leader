@@ -95,7 +95,7 @@ export default function Layout({ children, currentPageName }) {
   ];
 
   return (
-    <div style={{ fontFamily: "'Inter', sans-serif", color: "#1A1A1A", background: "#FAF8F5", minHeight: "100vh" }}>
+    <div data-theme={theme} style={{ fontFamily: "'Inter', sans-serif", color: "#1A1A1A", background: "#FAF8F5", minHeight: "100vh" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500&family=Lora:ital@1&display=swap');
 
@@ -109,9 +109,13 @@ export default function Layout({ children, currentPageName }) {
           background: #FAF8F5;
         }
 
-        img:not([alt="Latigo"]):not([alt="Altrua HealthShare"]):not([data-no-tint]),
-        video:not([data-no-tint]) {
+        [data-theme="copper"] img:not([alt="Latigo"]):not([alt="Altrua HealthShare"]):not([data-no-tint]),
+        [data-theme="copper"] video:not([data-no-tint]) {
           filter: sepia(50%) saturate(85%) brightness(98%);
+        }
+        [data-theme="teal"] img:not([alt="Latigo"]):not([alt="Altrua HealthShare"]):not([data-no-tint]),
+        [data-theme="teal"] video:not([data-no-tint]) {
+          filter: sepia(30%) saturate(70%) brightness(95%) hue-rotate(120deg);
         }
 
         .clove-nav-link {
