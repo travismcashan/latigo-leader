@@ -279,12 +279,25 @@ export default function Team() {
             }}>
               What LifePlan Produces
             </h2>
-            <div style={{ overflow: "hidden", borderRadius: 8, marginBottom: "2.5rem" }}>
-              <img
-                src="/images/lifeplan-wall.jpg"
-                alt="LifePlan session wall with Turning Points, Core Values, and objectives"
-                style={{ width: "100%", height: "auto", display: "block" }}
-              />
+            <div className="lifeplan-montage" style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1fr",
+              gridTemplateRows: "auto auto",
+              gap: "12px",
+              marginBottom: "2.5rem",
+            }}>
+              <div style={{ borderRadius: 12, overflow: "hidden" }}>
+                <img src="/images/lifeplan-photos/04.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", aspectRatio: "4/3" }} />
+              </div>
+              <div style={{ borderRadius: 12, overflow: "hidden" }}>
+                <img src="/images/lifeplan-wall.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", aspectRatio: "4/3" }} />
+              </div>
+              <div style={{ borderRadius: 12, overflow: "hidden", gridRow: "1 / 3" }}>
+                <img src="/images/lifeplan-photos/01.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ borderRadius: 12, overflow: "hidden", gridColumn: "1 / 3" }}>
+                <img src="/images/lifeplan-photos/03.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", aspectRatio: "2/1" }} />
+              </div>
             </div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, textAlign: "left" }}>
               {produces.map((item, idx) => (
