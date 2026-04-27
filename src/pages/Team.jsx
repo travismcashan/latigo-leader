@@ -80,6 +80,7 @@ export default function Team() {
     { a: "/images/wall-of-fame/7a.jpg", b: "/images/wall-of-fame/7b.jpg" },
     { a: "/images/wall-of-fame/8a.jpg", b: "/images/wall-of-fame/8b.jpg" },
     { a: "/images/wall-of-fame/9a.jpg", b: "/images/wall-of-fame/9b.jpg" },
+    { a: "/images/wall-of-fame/10a.jpg", b: "/images/wall-of-fame/10b.jpg" },
   ];
 
   const testimonials = [
@@ -366,8 +367,8 @@ export default function Team() {
 
       {/* 6. WALL OF FAME */}
       <FadeInOnScroll>
-        <section style={{ background: "#FFFFFF", padding: "6vw 4vw" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <section style={{ background: "#FAF8F5", padding: "6vw 4vw" }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
@@ -392,13 +393,13 @@ export default function Team() {
             <div className="wall-of-fame-grid" style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "20px",
+              gap: "32px",
             }}>
               {wallOfFame.map((pair, idx) => (
                 <div key={idx} style={{
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr",
-                  gap: "6px",
+                  gap: "12px",
                 }}>
                   <div style={{ borderRadius: 8, overflow: "hidden" }}>
                     <img
