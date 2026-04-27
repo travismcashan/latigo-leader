@@ -322,7 +322,7 @@ export default function About() {
                 transition: "background 0.3s ease", cursor: "pointer",
               }}
             >
-              Book a Discovery Call
+              Contact Us
             </Link>
           </div>
         </section>

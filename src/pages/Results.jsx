@@ -316,7 +316,7 @@ export default function Results() {
                 cursor: "pointer",
               }}
             >
-              Book a Discovery Call
+              Contact Us
             </Link>
           </div>
         </section>

@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import FadeInOnScroll from "../components/FadeInOnScroll";
-import DiscoveryCallModal from "../components/DiscoveryCallModal";
 import TestimonialCarousel from "../components/TestimonialCarousel";
 
 
@@ -10,7 +9,6 @@ export default function Home() {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("latigo-theme") || "teal";
   });
-  const [discoveryModalOpen, setDiscoveryModalOpen] = useState(false);
 
   // SEO Meta Tags and Structured Data
   useEffect(() => {
@@ -153,9 +151,7 @@ export default function Home() {
   useEffect(() => {
     const handleStorageChange = () => {
       const newTheme = localStorage.getItem("latigo-theme") || "teal";
-      const newMode = localStorage.getItem("latigo-landing-mode") === "true";
       setTheme(newTheme);
-      setIsLandingPage(newMode);
     };
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
@@ -184,7 +180,6 @@ export default function Home() {
 
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", color: "#1A1A1A", background: "#FFFFFF" }}>
-      <DiscoveryCallModal isOpen={discoveryModalOpen} onClose={() => setDiscoveryModalOpen(false)} />
 
       {/* ── 1. HERO ── */}
       <section ref={heroSectionRef} style={{ position: "relative", width: "100%", height: "100vh", minHeight: 600, overflow: "hidden", background: "#000" }}>
@@ -424,7 +419,7 @@ export default function Home() {
                 LifePlan is a two-day personal intensive designed for leaders who have achieved a lot — but aren't sure they're headed in the right direction. Through a guided process covering five life domains, you'll uncover purpose, name what's been holding you back, and build a strategic plan for the most important organization you'll ever lead — your own life.
               </p>
               {(
-                <Link to={createPageUrl("Services")} style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(1rem, 1.6vw, 1.2rem)", color: "#bf9f4b", textDecoration: "underline", fontWeight: 500 }}>
+                <Link to={createPageUrl("Team")} style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(1rem, 1.6vw, 1.2rem)", color: "#bf9f4b", textDecoration: "underline", fontWeight: 500 }}>
                   Explore LifePlan →
                 </Link>
               )}
@@ -509,7 +504,7 @@ export default function Home() {
             })}
           </ul>
           <div style={{ textAlign: "center", marginTop: 70 }}>
-           <button onClick={() => setDiscoveryModalOpen(true)} style={{
+           <Link to={createPageUrl("Contact")} style={{
              fontFamily: "'Inter', sans-serif",
              fontWeight: 500,
              fontSize: "0.85rem",
@@ -523,8 +518,7 @@ export default function Home() {
              color: "#FFFFFF",
              border: theme === "teal" ? "1px solid #FFFFFF" : "none",
              transition: "background 0.3s ease",
-             cursor: "pointer",
-           }}>Book a Discovery Call</button>
+           }}>Contact Us</Link>
           </div>
         </div>
       </section>
@@ -646,7 +640,7 @@ export default function Home() {
             Ready to move forward?
 
           </h2>
-          <button onClick={() => setDiscoveryModalOpen(true)} style={{
+          <Link to={createPageUrl("Contact")} style={{
             fontFamily: "'Inter', sans-serif",
             fontWeight: 500,
             fontSize: "0.85rem",
@@ -659,10 +653,9 @@ export default function Home() {
             background: currentColors.ctaButtonBackground,
             color: currentColors.ctaButtonText,
             transition: "background 0.3s ease, color 0.3s ease",
-            cursor: "pointer",
             }}>
-            Book a Discovery Call
-          </button>
+            Contact Us
+          </Link>
         </div>
       </section>
       </FadeInOnScroll>

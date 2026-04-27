@@ -444,7 +444,7 @@ export default function Services() {
               border: "1px solid #FFFFFF",
               transition: "background 0.3s ease",
             }}>
-              Book a Discovery Call
+              Contact Us
             </Link>
           </div>
         </section>

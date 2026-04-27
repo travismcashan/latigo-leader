@@ -435,7 +435,7 @@ export default function Team() {
               transition: "opacity 0.3s ease",
               cursor: "pointer",
             }}>
-              Book a Discovery Call
+              Contact Us
             </Link>
           </div>
         </section>
