@@ -279,12 +279,19 @@ export default function Team() {
             }}>
               What LifePlan Produces
             </h2>
-            <div style={{ overflow: "hidden", borderRadius: 8, marginBottom: "2.5rem" }}>
-              <img
-                src="/images/lifeplan-section.jpg"
-                alt="LifePlan facilitation session"
-                style={{ width: "100%", height: "auto", display: "block" }}
-              />
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1.5fr",
+              gridTemplateRows: "396px",
+              gap: "12px",
+              marginBottom: "2.5rem",
+            }}>
+              <div style={{ borderRadius: 8, overflow: "hidden" }}>
+                <img src="/images/lifeplan-section.jpg" alt="LifePlan facilitation session" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ borderRadius: 8, overflow: "hidden" }}>
+                <img src="/images/jared-lifeplan.jpg" alt="Jared facilitating a LifePlan session" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
             </div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, textAlign: "left" }}>
               {produces.map((item, idx) => (
