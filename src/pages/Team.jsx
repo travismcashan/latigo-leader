@@ -39,21 +39,6 @@ export default function Team() {
   const primary = theme === "teal" ? "#2A5C5A" : "#bf9f4b";
   const accent = theme === "teal" ? "#bf9f4b" : "#2A5C5A";
 
-  const allLifePlanPhotos = [
-    "/images/lifeplan-photos/01.jpg",
-    "/images/lifeplan-photos/02.jpg",
-    "/images/lifeplan-photos/03.jpg",
-    "/images/lifeplan-photos/04.jpg",
-    "/images/lifeplan-photos/05.jpg",
-    "/images/lifeplan-photos/06.jpg",
-    "/images/lifeplan-photos/07.jpg",
-    "/images/lifeplan-photos/08.jpg",
-  ];
-  const selectedPhotos = useMemo(() => {
-    const shuffled = [...allLifePlanPhotos].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 5);
-  }, []);
-
   const domains = [
     { number: "01", name: "Personal", desc: "Who are you at your core? What drives you, what drains you, and what patterns keep showing up?" },
     { number: "02", name: "Vocational", desc: "Is your work aligned with your calling — or are you building someone else's dream?" },
@@ -82,6 +67,12 @@ export default function Team() {
     { a: "/images/wall-of-fame/9a.jpg", b: "/images/wall-of-fame/9b.jpg" },
     { a: "/images/wall-of-fame/10a.jpg", b: "/images/wall-of-fame/10b.jpg" },
   ];
+
+  const montagePhotos = useMemo(() => {
+    const all = wallOfFame.flatMap(p => [p.a, p.b]);
+    const shuffled = [...all].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 4);
+  }, []);
 
   const testimonials = [
     {
@@ -291,16 +282,22 @@ export default function Team() {
             </h2>
             <div style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1.5fr",
-              gridTemplateRows: "396px",
+              gridTemplateColumns: "1.2fr 1fr 1fr",
+              gridTemplateRows: "192px 192px",
               gap: "12px",
               marginBottom: "2.5rem",
             }}>
-              <div style={{ borderRadius: 8, overflow: "hidden" }}>
-                <img src="/images/lifeplan-section.jpg" alt="LifePlan facilitation session" style={{ width: "115%", height: "115%", objectFit: "cover", objectPosition: "top left", display: "block" }} />
+              <div style={{ borderRadius: 8, overflow: "hidden", gridRow: "span 2" }}>
+                <img src={montagePhotos[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
               <div style={{ borderRadius: 8, overflow: "hidden" }}>
-                <img src="/images/jared-lifeplan.jpg" alt="Jared facilitating a LifePlan session" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                <img src={montagePhotos[1]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ borderRadius: 8, overflow: "hidden" }}>
+                <img src={montagePhotos[2]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ borderRadius: 8, overflow: "hidden", gridColumn: "2 / 4" }}>
+                <img src={montagePhotos[3]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
             </div>
             <ul style={{ listStyle: "none", padding: 0, margin: 0, textAlign: "left" }}>
