@@ -71,7 +71,7 @@ export default function TestimonialCarousel() {
 
   return (
     <section 
-      style={{ background: "#c5d0d6", padding: "6vw 4vw", textAlign: "center", position: "relative", overflow: "hidden" }}
+      style={{ background: "#c5d0d6", padding: "4vw 4vw", textAlign: "center", position: "relative", overflow: "hidden" }}
       onMouseEnter={(e) => {
         const buttons = e.currentTarget.querySelectorAll("button[aria-label*='testimonial']");
         buttons.forEach((btn) => (btn.style.opacity = "1"));
@@ -113,7 +113,7 @@ export default function TestimonialCarousel() {
       </button>
 
       <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative" }}>
-        <div style={{ minHeight: 420, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <div style={{ minHeight: 280, display: "flex", flexDirection: "column", justifyContent: "center" }}>
           {/* Testimonial Content */}
           <h3
             style={{
