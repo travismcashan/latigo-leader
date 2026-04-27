@@ -88,6 +88,25 @@ export default function Results() {
               Multi-day StratOp engagement with the executive leadership team
             </p>
 
+            {/* Photo gallery */}
+            <div className="altrua-gallery" style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "8px",
+              maxWidth: 700,
+              margin: "0 auto 3rem",
+            }}>
+              {[1,2,3,4,5,6,7,8,9].map(n => (
+                <div key={n} style={{ borderRadius: 6, overflow: "hidden" }}>
+                  <img
+                    src={`/images/altrua-gallery/${String(n).padStart(2,"0")}.jpg`}
+                    alt=""
+                    style={{ width: "100%", aspectRatio: "16/10", objectFit: "cover", objectPosition: "center", display: "block" }}
+                  />
+                </div>
+              ))}
+            </div>
+
             {/* Quote 1 */}
             <div style={{ marginBottom: "3rem" }}>
               <p style={{
@@ -164,25 +183,6 @@ export default function Results() {
               }}>
                 CEO, Altrua HealthShare
               </p>
-            </div>
-            {/* Photo gallery */}
-            <div className="altrua-gallery" style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "8px",
-              marginTop: "3rem",
-              maxWidth: 700,
-              margin: "3rem auto 0",
-            }}>
-              {[1,2,3,4,5,6,7,8,9].map(n => (
-                <div key={n} style={{ borderRadius: 6, overflow: "hidden" }}>
-                  <img
-                    src={`/images/altrua-gallery/${String(n).padStart(2,"0")}.jpg`}
-                    alt=""
-                    style={{ width: "100%", aspectRatio: "16/10", objectFit: "cover", objectPosition: "center", display: "block" }}
-                  />
-                </div>
-              ))}
             </div>
           </div>
         </section>
