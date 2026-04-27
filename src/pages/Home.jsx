@@ -611,7 +611,7 @@ export default function Home() {
       {/* ── 9. BOTTOM CTA ── thematic */}
       <FadeInOnScroll>
       <section style={{ 
-        padding: "18vmax 4vw",
+        padding: "8vw 4vw",
         textAlign: "center",
         position: "relative",
         overflow: "hidden"
