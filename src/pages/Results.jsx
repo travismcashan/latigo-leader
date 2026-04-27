@@ -169,6 +169,29 @@ export default function Results() {
         </section>
       </FadeInOnScroll>
 
+      {/* -- ALTRUA PHOTO GALLERY -- */}
+      <FadeInOnScroll>
+        <section style={{ background: "#FAF8F5", padding: "6vw 4vw" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <div className="altrua-gallery" style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "16px",
+            }}>
+              {[1,2,3,4,5,6,7,8,9].map(n => (
+                <div key={n} style={{ borderRadius: 8, overflow: "hidden" }}>
+                  <img
+                    src={`/images/altrua-gallery/${String(n).padStart(2,"0")}.jpg`}
+                    alt=""
+                    style={{ width: "100%", aspectRatio: "16/10", objectFit: "cover", objectPosition: "center", display: "block" }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </FadeInOnScroll>
+
       {/* -- 3. LIFEPLAN TESTIMONIALS -- */}
       <FadeInOnScroll>
         <section style={{ background: "#c5d0d6", padding: "6vw 4vw" }}>
@@ -326,6 +349,7 @@ export default function Results() {
           .testimonial-grid { grid-template-columns: 1fr !important; }
           .case-study-card { width: 100% !important; }
           .results-testimonial-row { grid-template-columns: 1fr !important; }
+          .altrua-gallery { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </div>
