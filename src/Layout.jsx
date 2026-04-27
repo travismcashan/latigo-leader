@@ -110,7 +110,7 @@ export default function Layout({ children, currentPageName }) {
         }
 
         main img:not([alt="Latigo"]):not([alt="Altrua HealthShare"]) {
-          filter: sepia(18%) saturate(85%) brightness(98%);
+          filter: sepia(50%) saturate(85%) brightness(98%);
         }
 
         .clove-nav-link {
