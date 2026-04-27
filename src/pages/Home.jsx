@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import PageComingSoon from "../components/PageComingSoon";
 import FadeInOnScroll from "../components/FadeInOnScroll";
 import DiscoveryCallModal from "../components/DiscoveryCallModal";
 import TestimonialCarousel from "../components/TestimonialCarousel";
@@ -10,10 +9,6 @@ import TestimonialCarousel from "../components/TestimonialCarousel";
 export default function Home() {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("latigo-theme") || "teal";
-  });
-  const [comingSoonOpen, setComingSoonOpen] = useState(false);
-  const [isLandingPage, setIsLandingPage] = useState(() => {
-    return localStorage.getItem("latigo-landing-mode") === "true";
   });
   const [discoveryModalOpen, setDiscoveryModalOpen] = useState(false);
 
@@ -187,16 +182,8 @@ export default function Home() {
 
   const currentColors = colors[theme];
 
-  const handleLinkClick = (e, page) => {
-    if (page !== "Contact") {
-      e.preventDefault();
-      setComingSoonOpen(true);
-    }
-  };
-
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", color: "#1A1A1A", background: "#FFFFFF" }}>
-      <PageComingSoon isOpen={comingSoonOpen} onClose={() => setComingSoonOpen(false)} />
       <DiscoveryCallModal isOpen={discoveryModalOpen} onClose={() => setDiscoveryModalOpen(false)} />
 
       {/* ── 1. HERO ── */}
@@ -260,7 +247,7 @@ export default function Home() {
 
       {/* ── 2. OUR APPROACH ── centered, cream bg */}
       <FadeInOnScroll>
-      <section style={{ background: "#FAF8F5", padding: "9.9vmax 4vw", textAlign: "center" }}>
+      <section style={{ background: "#FAF8F5", padding: "8vw 4vw", textAlign: "center" }}>
         <div style={{ maxWidth: 860, margin: "0 auto" }}>
           <h2 style={{
             fontFamily: "'DM Sans', sans-serif",
@@ -281,8 +268,8 @@ export default function Home() {
           }}>
             We are certified facilitators of the Paterson LifePlan and StratOp methodologies — proven strategic frameworks refined over decades of work with organizations ranging from Fortune 500 companies to churches and nonprofits. We guide individuals through personal LifePlan intensives and leadership teams through the StratOp process to create clarity, alignment, and sustained forward movement. Whether you're a CEO navigating growth, a pastor leading through transition, or an executive searching for purpose — we help you see clearly and plan strategically.
           </p>
-          {!isLandingPage && (
-            <Link to={createPageUrl("About")} onClick={(e) => handleLinkClick(e, "About")} style={{
+          {(
+            <Link to={createPageUrl("About")} style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: "0.85rem",
             letterSpacing: "0.1em",
@@ -363,7 +350,7 @@ export default function Home() {
                   {card.title}
                 </h4>
                 <p style={{ fontSize: "0.95rem", lineHeight: 1.6, color: "#555", marginBottom: "1rem", maxWidth: 300, marginLeft: "auto", marginRight: "auto" }}>{card.desc}</p>
-                <Link to={card.href} onClick={(e) => handleLinkClick(e, "Services")} style={{
+                <Link to={card.href} style={{
                   fontFamily: "'Inter', sans-serif",
                   fontSize: "0.95rem",
                   color: "#bf9f4b",
@@ -382,14 +369,14 @@ export default function Home() {
 
       {/* ── 4. STRATEGIC PLANNING — image left, text right ── */}
       <FadeInOnScroll>
-      <section style={{ background: "transparent", padding: "7.5vw 4vw" }}>
+      <section style={{ background: "transparent", padding: "8vw 4vw" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <div className="float-block" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4vw", alignItems: "center" }}>
-            <div style={{ overflow: "hidden", aspectRatio: "1/1" }}>
+            <div style={{ overflow: "hidden", aspectRatio: "5/4" }}>
               <img
                 src="/images/stratop-planning.jpeg"
                 alt=""
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", borderRadius: 8 }}
+                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center bottom", display: "block", borderRadius: 8 }}
               />
             </div>
             <div style={{ padding: "3vw 2vw" }}>
@@ -406,8 +393,8 @@ export default function Home() {
               <p style={{ fontSize: "clamp(1rem, 1.6vw, 1.2rem)", lineHeight: 1.75, color: "#1A1A1A", margin: "0 0 1.75rem 0" }}>
                 StratOp is a multi-day facilitated intensive that brings your entire leadership team together to build a strategic plan grounded in reality — not theory. We start with perspective, surface the hard truths, clarify priorities, and walk out with a plan your team will actually follow. Because they built it together.
               </p>
-              {!isLandingPage && (
-                <Link to={createPageUrl("Services")} onClick={(e) => handleLinkClick(e, "Services")} style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(1rem, 1.6vw, 1.2rem)", color: "#bf9f4b", textDecoration: "underline", fontWeight: 500 }}>
+              {(
+                <Link to={createPageUrl("Services")} style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(1rem, 1.6vw, 1.2rem)", color: "#bf9f4b", textDecoration: "underline", fontWeight: 500 }}>
                   Explore StratOp →
                 </Link>
               )}
@@ -419,7 +406,7 @@ export default function Home() {
 
       {/* ── 5. LIFEPLAN — text left, image right ── */}
       <FadeInOnScroll>
-      <section style={{ background: "#FAF8F5", padding: "7.5vw 4vw" }}>
+      <section style={{ background: "#FAF8F5", padding: "8vw 4vw" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <div className="float-block lifeplan-block" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4vw", alignItems: "center" }}>
             <div style={{ padding: "3vw 2vw" }}>
@@ -436,17 +423,17 @@ export default function Home() {
               <p style={{ fontSize: "clamp(1rem, 1.6vw, 1.2rem)", lineHeight: 1.75, color: "#1A1A1A", margin: "0 0 1.75rem 0" }}>
                 LifePlan is a two-day personal intensive designed for leaders who have achieved a lot — but aren't sure they're headed in the right direction. Through a guided process covering five life domains, you'll uncover purpose, name what's been holding you back, and build a strategic plan for the most important organization you'll ever lead — your own life.
               </p>
-              {!isLandingPage && (
-                <Link to={createPageUrl("Services")} onClick={(e) => handleLinkClick(e, "Services")} style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(1rem, 1.6vw, 1.2rem)", color: "#bf9f4b", textDecoration: "underline", fontWeight: 500 }}>
+              {(
+                <Link to={createPageUrl("Services")} style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(1rem, 1.6vw, 1.2rem)", color: "#bf9f4b", textDecoration: "underline", fontWeight: 500 }}>
                   Explore LifePlan →
                 </Link>
               )}
             </div>
-            <div style={{ overflow: "hidden", aspectRatio: "1/1" }}>
+            <div style={{ overflow: "hidden", aspectRatio: "5/4" }}>
               <img
                 src="/images/lifeplan-section.jpg"
                 alt=""
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", borderRadius: 8 }}
+                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block", borderRadius: 8 }}
               />
             </div>
           </div>
@@ -456,7 +443,7 @@ export default function Home() {
 
       {/* ── 6. HOW WE WORK ── themed */}
       <FadeInOnScroll>
-      <section style={{ background: theme === "teal" ? "#2A5C5A" : "#EDE9E3", padding: "9.9vmax 4vw" }}>
+      <section style={{ background: theme === "teal" ? "#2A5C5A" : "#EDE9E3", padding: "8vw 4vw" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <div style={{ textAlign: "center", paddingBottom: 70 }}>
             <h2 style={{
@@ -489,11 +476,11 @@ export default function Home() {
                 linkPage: "Contact",
               },
               {
-                image: "/images/deliver-icon.png",
+                image: "/images/intensive-icon.svg",
                 label: "The Intensive",
                 name: "The Intensive",
                 desc: "Through a multi-day facilitated process, we guide your team (or you, individually) through proven frameworks that surface truth, build alignment, and produce a strategic plan grounded in reality.",
-                iconSize: 160,
+                iconSize: 112,
                 linkPage: "Services",
               },
               {
@@ -550,7 +537,7 @@ export default function Home() {
 
       {/* ── 8. MEET THE GUIDES ── cream */}
       <FadeInOnScroll>
-      <section style={{ background: "#FAF8F5", padding: "9.9vmax 4vw" }}>
+      <section style={{ background: "#FAF8F5", padding: "8vw 4vw" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <div style={{ textAlign: "center", paddingBottom: 70 }}>
             <h2 style={{
@@ -561,7 +548,7 @@ export default function Home() {
               lineHeight: 1.15,
               margin: 0,
             }}>
-              Meet the Guides
+              Two Leaders, One Mission
             </h2>
           </div>
           <ul className="team-grid" style={{
@@ -575,20 +562,20 @@ export default function Home() {
           }}>
             {[
               {
-                img: "/images/jared.png",
+                img: "/images/jared.jpg",
                 name: "Jared Lyons",
-                title: "Co-Founder & Certified LifePlan Guide",
-                desc: "20+ years in ministry and leadership development. Jared helps individuals discover purpose and build a plan for the life they were created to live.",
+                title: "Lead Pastor, Zao Church",
+                desc: "A visionary leader and certified StratOp and LifePlan facilitator with a passion for helping organizations grow with intention and seeing people live out their God-given purpose.",
               },
               {
-                img: "/images/dustin.png",
+                img: "/images/dustin.jpg",
                 name: "Dustin Sample",
-                title: "Co-Founder & Certified StratOp Champion",
-                desc: "21+ years of ministry, entrepreneurship, and organizational leadership. Dustin helps teams align vision with execution so the plan actually moves.",
+                title: "Executive Pastor, Zao Church",
+                desc: "With 20+ years in ministry, Dustin is a certified facilitator, competitive CrossFit athlete, and business owner who brings intensity and clarity to every engagement.",
               },
             ].map((m) => (
               <li key={m.name} style={{ textAlign: "center" }}>
-                <div style={{ aspectRatio: "3/4", overflow: "hidden", marginBottom: "8%", maxWidth: 380, margin: "0 auto 8% auto" }}>
+                <div style={{ aspectRatio: "1/1", overflow: "hidden", marginBottom: "8%", maxWidth: 380, margin: "0 auto 8% auto" }}>
                   <img src={m.img} alt={m.name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 20%", display: "block", borderRadius: 8 }} />
                 </div>
                 <h3 style={{
@@ -604,9 +591,9 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          {!isLandingPage && (
+          {(
             <div style={{ textAlign: "center", marginTop: 70 }}>
-              <Link to={createPageUrl("About")} onClick={(e) => handleLinkClick(e, "About")} style={{
+              <Link to={createPageUrl("About")} style={{
                 fontFamily: "'Inter', sans-serif",
                 fontWeight: 500,
                 fontSize: "0.85rem",
@@ -687,7 +674,7 @@ export default function Home() {
           {[
             "/images/gallery-1.jpeg",
             "/images/gallery-2.jpeg",
-            "/images/gallery-3.jpg",
+            "/images/jared-lifeplan.jpg",
             "/images/gallery-4.jpeg",
             "/images/gallery-5.jpg",
           ].map((src, idx) => (

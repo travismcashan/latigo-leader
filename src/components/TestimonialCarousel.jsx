@@ -71,7 +71,7 @@ export default function TestimonialCarousel() {
 
   return (
     <section 
-      style={{ background: "#c5d0d6", padding: "6.6vmax 4vw", textAlign: "center", position: "relative", overflow: "hidden" }}
+      style={{ background: "#c5d0d6", padding: "8vw 4vw", textAlign: "center", position: "relative", overflow: "hidden" }}
       onMouseEnter={(e) => {
         const buttons = e.currentTarget.querySelectorAll("button[aria-label*='testimonial']");
         buttons.forEach((btn) => (btn.style.opacity = "1"));
