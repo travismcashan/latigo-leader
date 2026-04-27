@@ -97,7 +97,7 @@ export default function Results() {
                 margin: "0 0 0.5rem 0",
                 fontFamily: "'DM Sans', sans-serif",
               }}>
-                {"\u201C"}
+                {"“"}
               </p>
               <p style={{
                 fontFamily: "'Lora', serif",
@@ -136,7 +136,7 @@ export default function Results() {
                 margin: "0 0 0.5rem 0",
                 fontFamily: "'DM Sans', sans-serif",
               }}>
-                {"\u201C"}
+                {"“"}
               </p>
               <p style={{
                 fontFamily: "'Lora', serif",
@@ -171,8 +171,8 @@ export default function Results() {
 
       {/* -- 3. LIFEPLAN TESTIMONIALS -- */}
       <FadeInOnScroll>
-        <section style={{ background: "#c5d0d6", padding: "6vw 4vw", textAlign: "center" }}>
-          <div style={{ maxWidth: 860, margin: "0 auto" }}>
+        <section style={{ background: "#c5d0d6", padding: "6vw 4vw" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
@@ -183,40 +183,39 @@ export default function Results() {
             }}>
               LifePlan Testimonials
             </h2>
-            {[
-              {
-                quote: "LifePlan gave me a sense of direction and peace in many aspects of my life. I\u2019m now working to be the person I believe God has called me to be.",
-                name: "Kevin Burke",
-              },
-              {
-                quote: "Going through LifePlan was exactly what I needed at this point in my life. It helped me clearly identify the things that were hindering me from fully stepping into my purpose and calling. The clarity I gained has already made it easier to say yes to what truly matters \u2014 and no to what doesn\u2019t.",
-                name: "Beaty Bass",
-              },
-            ].map((t, i) => (
-              <div key={t.name} style={{
-                marginBottom: i === 0 ? "3rem" : 0,
-              }}>
-                <p style={{
-                  fontFamily: "'Lora', serif",
-                  fontStyle: "italic",
-                  fontSize: "clamp(1.2rem, 2.2vw, 1.6rem)",
-                  lineHeight: 1.75,
-                  color: "#1f3d3c",
-                  maxWidth: 700,
-                  margin: "0 auto 1rem auto",
-                }}>
-                  {"\u201C"}{t.quote}{"\u201D"}
-                </p>
-                <p style={{
-                  fontWeight: 700,
-                  fontSize: "1rem",
-                  color: "#1f3d3c",
-                  margin: 0,
-                }}>
-                  {t.name}
-                </p>
+            <div className="results-testimonial-row" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "2.5rem", alignItems: "center", marginBottom: "3rem" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                <div style={{ borderRadius: 8, overflow: "hidden", width: 140 }}>
+                  <img src="/images/wall-of-fame/6a.jpg" alt="" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", objectPosition: "center top", display: "block" }} />
+                </div>
+                <div style={{ borderRadius: 8, overflow: "hidden", width: 140 }}>
+                  <img src="/images/wall-of-fame/6b.jpg" alt="" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", objectPosition: "center top", display: "block" }} />
+                </div>
               </div>
-            ))}
+              <div>
+                <p style={{ fontFamily: "'Lora', serif", fontStyle: "italic", fontSize: "clamp(1.1rem, 2vw, 1.4rem)", lineHeight: 1.75, color: "#1f3d3c", margin: "0 0 1rem 0" }}>
+                  “LifePlan gave me a sense of direction and peace in many aspects of my life. I’m now working to be the person I believe God has called me to be.”
+                </p>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "clamp(1.1rem, 2vw, 1.4rem)", color: "#1f3d3c", margin: 0 }}>— Kevin Burke</p>
+              </div>
+            </div>
+
+            <div className="results-testimonial-row" style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "2.5rem", alignItems: "center" }}>
+              <div>
+                <p style={{ fontFamily: "'Lora', serif", fontStyle: "italic", fontSize: "clamp(1.1rem, 2vw, 1.4rem)", lineHeight: 1.75, color: "#1f3d3c", margin: "0 0 1rem 0" }}>
+                  “Going through LifePlan was exactly what I needed at this point in my life. It helped me clearly identify the things that were hindering me from fully stepping into my purpose and calling. The clarity I gained has already made it easier to say yes to what truly matters — and no to what doesn’t.”
+                </p>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "clamp(1.1rem, 2vw, 1.4rem)", color: "#1f3d3c", margin: 0 }}>— Beaty Bass</p>
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                <div style={{ borderRadius: 8, overflow: "hidden", width: 140 }}>
+                  <img src="/images/wall-of-fame/10a.jpg" alt="" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", objectPosition: "center top", display: "block" }} />
+                </div>
+                <div style={{ borderRadius: 8, overflow: "hidden", width: 140 }}>
+                  <img src="/images/wall-of-fame/10b.jpg" alt="" style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", objectPosition: "center top", display: "block" }} />
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </FadeInOnScroll>
@@ -326,6 +325,7 @@ export default function Results() {
         @media (max-width: 768px) {
           .testimonial-grid { grid-template-columns: 1fr !important; }
           .case-study-card { width: 100% !important; }
+          .results-testimonial-row { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </div>
