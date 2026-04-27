@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import FadeInOnScroll from "@/components/FadeInOnScroll";
@@ -392,15 +392,11 @@ export default function Team() {
             </p>
             <div className="wall-of-fame-grid" style={{
               display: "grid",
-              gridTemplateColumns: "repeat(2, 1fr)",
-              gap: "32px",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: "16px",
             }}>
               {wallOfFame.map((pair, idx) => (
-                <div key={idx} style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: "12px",
-                }}>
+                <React.Fragment key={idx}>
                   <div style={{ borderRadius: 8, overflow: "hidden" }}>
                     <img
                       src={pair.a}
@@ -415,7 +411,7 @@ export default function Team() {
                       style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", objectPosition: "center top", display: "block" }}
                     />
                   </div>
-                </div>
+                </React.Fragment>
               ))}
             </div>
           </div>
@@ -513,10 +509,7 @@ export default function Team() {
         @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap');
         @media (max-width: 768px) {
           .lifeplan-domains-grid { grid-template-columns: 1fr !important; }
-          .wall-of-fame-grid { grid-template-columns: 1fr !important; }
-        }
-        @media (max-width: 480px) {
-          .wall-of-fame-grid { grid-template-columns: 1fr !important; }
+          .wall-of-fame-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
       `}</style>
     </div>
