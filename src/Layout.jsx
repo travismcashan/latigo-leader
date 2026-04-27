@@ -11,10 +11,12 @@ export default function Layout({ children, currentPageName }) {
 
   const isHomePage = currentPageName === "Home";
 
-  const allGalleryPhotos = Array.from({ length: 15 }, (_, i) => `/images/footer-gallery/${String(i + 1).padStart(2, "0")}.jpg`);
+  const stratOpPhotos = Array.from({ length: 15 }, (_, i) => `/images/footer-gallery/${String(i + 1).padStart(2, "0")}.jpg`);
+  const lifePlanPhotos = Array.from({ length: 10 }, (_, i) => `/images/wall-of-fame/${i + 1}a.jpg`);
   const galleryPhotos = useMemo(() => {
-    const shuffled = [...allGalleryPhotos].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 5);
+    const pickStratOp = [...stratOpPhotos].sort(() => Math.random() - 0.5).slice(0, 3);
+    const pickLifePlan = [...lifePlanPhotos].sort(() => Math.random() - 0.5).slice(0, 2);
+    return [...pickStratOp, ...pickLifePlan].sort(() => Math.random() - 0.5);
   }, [location.pathname]);
   const [theme, setTheme] = useState(() => {
     if (typeof window !== "undefined") {
