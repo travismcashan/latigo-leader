@@ -161,16 +161,24 @@ export default function Layout({ children, currentPageName }) {
           </Link>
 
           <div className="desktop-nav" style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
-            {navLinks.map((link) => (
-              <Link
-                key={link.page}
-                to={createPageUrl(link.page)}
-                className="clove-nav-link"
-                style={{ color: isTransparent ? "#FAF8F5" : "#4f2d37", fontSize: "1.2rem" }}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = currentPageName === link.page;
+              return (
+                <Link
+                  key={link.page}
+                  to={createPageUrl(link.page)}
+                  className="clove-nav-link"
+                  style={{
+                    color: isTransparent ? "#FAF8F5" : "#4f2d37",
+                    fontSize: "1.2rem",
+                    borderBottom: isActive ? `2px solid ${isTransparent ? "#FAF8F5" : "#bf9f4b"}` : "2px solid transparent",
+                    paddingBottom: "4px",
+                  }}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           <Link to={createPageUrl("Contact")} className="btn-primary desktop-cta" style={{ background: "#bf9f4b", color: "#FAF8F5" }}>

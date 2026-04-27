@@ -106,46 +106,10 @@ export default function About() {
               <p style={{
                 fontSize: "clamp(1rem, 1.5vw, 1.15rem)",
                 lineHeight: 1.75, color: "#1A1A1A",
-                margin: "0 0 2rem 0",
+                margin: 0,
               }}>
                 The <span style={{ color: c.accent, fontWeight: 600 }}>latigo</span> is the leather strap that secures the saddle to the horse. It's not glamorous, but without it, the ride fails. The saddle slips. In the same way, we help leaders and organizations fasten vision to action, tighten what's loose, and release potential into sustainable movement.
               </p>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-                <div>
-                  <p style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: "clamp(1.6rem, 2.5vw, 2.2rem)",
-                    fontWeight: 700, color: c.primary, lineHeight: 1.2,
-                    margin: "0 0 0.25rem 0",
-                  }}>
-                    Vision
-                  </p>
-                  <p style={{
-                    fontSize: "0.75rem", letterSpacing: "0.15em",
-                    textTransform: "uppercase", color: "#888",
-                    fontWeight: 500, margin: 0,
-                  }}>
-                    Without Drift
-                  </p>
-                </div>
-                <div>
-                  <p style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: "clamp(1.6rem, 2.5vw, 2.2rem)",
-                    fontWeight: 700, color: c.primary, lineHeight: 1.2,
-                    margin: "0 0 0.25rem 0",
-                  }}>
-                    Strategy
-                  </p>
-                  <p style={{
-                    fontSize: "0.75rem", letterSpacing: "0.15em",
-                    textTransform: "uppercase", color: "#888",
-                    fontWeight: 500, margin: 0,
-                  }}>
-                    Without Confusion
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </section>

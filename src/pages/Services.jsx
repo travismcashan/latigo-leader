@@ -108,11 +108,11 @@ export default function Services() {
   ];
 
   const deliverables = [
-    "Strategic Dashboard \u2014 your organization\u2019s health at a glance",
-    "W.I.N. Wheel \u2014 What\u2019s Important Now, visualized and prioritized",
-    "Plan-on-a-Page \u2014 your entire strategic plan in one clear view",
-    "Action Initiative Profiles \u2014 detailed plans for each strategic priority with owners, timelines, and budgets",
-    "Quarterly review framework for sustained accountability",
+    { bold: "Strategic Dashboard", rest: "your organization's health at a glance" },
+    { bold: "W.I.N. Wheel", rest: "What's Important Now, visualized and prioritized" },
+    { bold: "Plan-on-a-Page", rest: "your entire strategic plan in one clear view" },
+    { bold: "Action Initiative Profiles", rest: "detailed plans for each strategic priority with owners, timelines, and budgets" },
+    { bold: "", rest: "Quarterly review framework for sustained accountability" },
   ];
 
   return (
@@ -278,7 +278,7 @@ export default function Services() {
               {deliverables.map((item, idx) => (
                 <p key={idx} style={{
                   position: "relative",
-                  paddingLeft: "1.5rem",
+                  paddingLeft: "2rem",
                   fontSize: "clamp(1rem, 1.6vw, 1.15rem)",
                   lineHeight: 1.75,
                   color: "#1A1A1A",
@@ -290,12 +290,12 @@ export default function Services() {
                     top: 0,
                     color: currentColors.accent,
                     fontWeight: 700,
-                    fontSize: "1.2rem",
+                    fontSize: "1.1rem",
                     lineHeight: 1.75,
                   }}>
-                    —
+                    ✓
                   </span>
-                  {item}
+                  {item.bold && <strong>{item.bold}</strong>}{item.bold ? " — " : ""}{item.rest}
                 </p>
               ))}
             </div>
