@@ -15,7 +15,7 @@ export default function Contact() {
     name: "",
     email: "",
     phone: "",
-    interest: "",
+    interests: [],
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -68,14 +68,14 @@ export default function Contact() {
           name: formData.name,
           email: formData.email,
           phone: formData.phone || "Not provided",
-          interest: formData.interest || "Not specified",
+          interest: formData.interests.length > 0 ? formData.interests.join(", ") : "Not specified",
           message: formData.message,
-          _subject: `Latigo Website Inquiry: ${formData.interest || "General"}`,
+          _subject: `Latigo Website Inquiry: ${formData.interests.length > 0 ? formData.interests.join(", ") : "General"}`,
         }),
       });
       if (res.ok) {
         setSubmitted(true);
-        setFormData({ name: "", email: "", phone: "", interest: "", message: "" });
+        setFormData({ name: "", email: "", phone: "", interests: [], message: "" });
       } else {
         setError("Something went wrong. Please try again or email us directly.");
       }
@@ -145,32 +145,6 @@ export default function Contact() {
               >
                 Book a discovery call and take the first step toward clarity. Whether you're exploring LifePlan for yourself or StratOp for your organization, we'd love to hear from you.
               </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                <a
-                  href="mailto:dustin@latigoleader.com"
-                  style={{
-                    fontSize: "1rem",
-                    color: "#1A1A1A",
-                    textDecoration: "none",
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.textDecoration = "underline"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.textDecoration = "none"; }}
-                >
-                  dustin@latigoleader.com
-                </a>
-                <a
-                  href="mailto:jared@latigoleader.com"
-                  style={{
-                    fontSize: "1rem",
-                    color: "#1A1A1A",
-                    textDecoration: "none",
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.textDecoration = "underline"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.textDecoration = "none"; }}
-                >
-                  jared@latigoleader.com
-                </a>
-              </div>
             </div>
 
             {/* Right Column */}
@@ -195,7 +169,7 @@ export default function Contact() {
               ) : (
                 <form onSubmit={handleSubmit}>
                   <div style={fieldWrapStyle}>
-                    <label style={labelStyle}>Name</label>
+                    <label style={labelStyle}>Full Name</label>
                     <input
                       type="text"
                       name="name"
@@ -207,7 +181,7 @@ export default function Contact() {
                     />
                   </div>
                   <div style={fieldWrapStyle}>
-                    <label style={labelStyle}>Email</label>
+                    <label style={labelStyle}>Email Address</label>
                     <input
                       type="email"
                       name="email"
@@ -219,7 +193,7 @@ export default function Contact() {
                     />
                   </div>
                   <div style={fieldWrapStyle}>
-                    <label style={labelStyle}>Phone</label>
+                    <label style={labelStyle}>Phone Number</label>
                     <input
                       type="tel"
                       name="phone"
@@ -232,22 +206,26 @@ export default function Contact() {
                   </div>
                   <div style={fieldWrapStyle}>
                     <label style={labelStyle}>What are you interested in?</label>
-                    <select
-                      name="interest"
-                      value={formData.interest}
-                      onChange={handleChange}
-                      style={{
-                        ...inputStyle,
-                        appearance: "auto",
-                      }}
-                    >
-                      <option value="">Select an option</option>
-                      <option value="LifePlan">LifePlan</option>
-                      <option value="StratOp">StratOp</option>
-                      <option value="Coaching">Coaching</option>
-                      <option value="Speaking">Speaking</option>
-                      <option value="Other">Other</option>
-                    </select>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem 1.5rem", marginTop: "0.5rem" }}>
+                      {["LifePlan", "StratOp", "Coaching", "Speaking", "Other"].map((option) => (
+                        <label key={option} style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer", fontSize: "1rem", fontFamily: "'Inter', sans-serif" }}>
+                          <input
+                            type="checkbox"
+                            checked={formData.interests.includes(option)}
+                            onChange={(e) => {
+                              setFormData(prev => ({
+                                ...prev,
+                                interests: e.target.checked
+                                  ? [...prev.interests, option]
+                                  : prev.interests.filter(i => i !== option),
+                              }));
+                            }}
+                            style={{ width: 18, height: 18, accentColor: accent, cursor: "pointer" }}
+                          />
+                          {option}
+                        </label>
+                      ))}
+                    </div>
                   </div>
                   <div style={fieldWrapStyle}>
                     <label style={labelStyle}>Comments or Questions</label>
