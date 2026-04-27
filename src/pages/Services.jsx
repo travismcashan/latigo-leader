@@ -154,7 +154,7 @@ export default function Services() {
             lineHeight: 1.1,
             margin: "0 0 1.2rem 0",
           }}>
-            Align Your Team. Clarify the Plan. Move Forward.
+            Align Your Team.<br />Clarify the Plan.<br />Move Forward.
           </h1>
           <p style={{
             fontFamily: "'Inter', sans-serif",

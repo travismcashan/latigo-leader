@@ -129,7 +129,7 @@ export default function Home() {
       poster: "/images/lifeplan-first-frame.png",
     },
   ];
-  const [heroVideoIndex, setHeroVideoIndex] = useState(() => Math.floor(Math.random() * heroVideos.length));
+  const [heroVideoIndex, setHeroVideoIndex] = useState(0);
   const heroVideo = heroVideos[heroVideoIndex];
 
   useEffect(() => {
