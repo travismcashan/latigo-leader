@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import FadeInOnScroll from "@/components/FadeInOnScroll";
 
 export default function Contact() {
+  const navigate = useNavigate();
   const [theme, setTheme] = useState(() => localStorage.getItem("latigo-theme") || "teal");
   useEffect(() => {
     const sync = () => setTheme(localStorage.getItem("latigo-theme") || "teal");
@@ -18,7 +20,6 @@ export default function Contact() {
     interests: [],
     message: "",
   });
-  const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
@@ -74,8 +75,7 @@ export default function Contact() {
         }),
       });
       if (res.ok) {
-        setSubmitted(true);
-        setFormData({ name: "", email: "", phone: "", interests: [], message: "" });
+        navigate("/ThankYou");
       } else {
         setError("Something went wrong. Please try again or email us directly.");
       }
@@ -149,24 +149,6 @@ export default function Contact() {
 
             {/* Right Column */}
             <div>
-              {submitted ? (
-                <div style={{ textAlign: "center", padding: "3rem 0" }}>
-                  <h2
-                    style={{
-                      fontFamily: "'DM Sans', sans-serif",
-                      fontSize: "1.5rem",
-                      fontWeight: 700,
-                      color: primary,
-                      margin: "0 0 0.75rem 0",
-                    }}
-                  >
-                    Thank You!
-                  </h2>
-                  <p style={{ fontSize: "1rem", color: "#555", lineHeight: 1.6 }}>
-                    We'll be in touch soon.
-                  </p>
-                </div>
-              ) : (
                 <form onSubmit={handleSubmit}>
                   <div style={fieldWrapStyle}>
                     <label style={labelStyle}>Full Name</label>
@@ -268,7 +250,6 @@ export default function Contact() {
                     {submitting ? "Sending..." : "Let's Get Started"}
                   </button>
                 </form>
-              )}
             </div>
           </div>
         </section>

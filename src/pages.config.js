@@ -4,6 +4,7 @@ import Services from './pages/Services';
 import Team from './pages/Team';
 import Contact from './pages/Contact';
 import Results from './pages/Results';
+import ThankYou from './pages/ThankYou';
 import __Layout from './Layout.jsx';
 
 export const PAGES = {
@@ -13,6 +14,7 @@ export const PAGES = {
     "Team": Team,
     "Contact": Contact,
     "Results": Results,
+    "ThankYou": ThankYou,
 }
 
 export const pagesConfig = {
