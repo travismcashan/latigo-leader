@@ -69,9 +69,14 @@ export default function Team() {
   ];
 
   const montagePhotos = useMemo(() => {
-    const all = wallOfFame.flatMap(p => [p.a, p.b]);
-    const shuffled = [...all].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 4);
+    const aPhotos = wallOfFame.map(p => p.a).sort(() => Math.random() - 0.5);
+    const allPhotos = wallOfFame.flatMap(p => [p.a, p.b]).sort(() => Math.random() - 0.5);
+    return [
+      aPhotos[0],       // tall left — room shot only
+      allPhotos[0],     // top right square — either works
+      allPhotos[1],     // top right square — either works
+      aPhotos[1],       // wide bottom — room shot only
+    ];
   }, []);
 
   const testimonials = [
