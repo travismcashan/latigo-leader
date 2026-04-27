@@ -274,6 +274,28 @@ export default function Services() {
             }}>
               What StratOp Produces
             </h2>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr 1.2fr",
+              gridTemplateRows: "150px 150px",
+              gap: "8px",
+              marginBottom: "2.5rem",
+              borderRadius: 8,
+              overflow: "hidden",
+            }}>
+              <div style={{ overflow: "hidden" }}>
+                <img src={selectedPhotos[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ overflow: "hidden" }}>
+                <img src={selectedPhotos[1]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ overflow: "hidden", gridRow: "1 / 3" }}>
+                <img src={selectedPhotos[2]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+              <div style={{ overflow: "hidden", gridColumn: "1 / 3" }}>
+                <img src={selectedPhotos[3]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+            </div>
             <div style={{ textAlign: "left", maxWidth: 640, margin: "0 auto" }}>
               {deliverables.map((item, idx) => (
                 <p key={idx} style={{
@@ -298,33 +320,6 @@ export default function Services() {
                   {item.bold && <strong>{item.bold}</strong>}{item.bold ? " — " : ""}{item.rest}
                 </p>
               ))}
-            </div>
-          </div>
-        </section>
-      </FadeInOnScroll>
-
-      {/* -- PHOTO MONTAGE -- */}
-      <FadeInOnScroll>
-        <section style={{ padding: "4vw 4vw 0", overflow: "hidden" }}>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1.2fr",
-            gridTemplateRows: "1fr 1fr",
-            gap: "12px",
-            maxWidth: 1200,
-            margin: "0 auto",
-          }}>
-            <div style={{ borderRadius: 12, overflow: "hidden" }}>
-              <img src={selectedPhotos[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", aspectRatio: "4/3" }} />
-            </div>
-            <div style={{ borderRadius: 12, overflow: "hidden" }}>
-              <img src={selectedPhotos[1]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", aspectRatio: "4/3" }} />
-            </div>
-            <div style={{ borderRadius: 12, overflow: "hidden", gridRow: "1 / 3" }}>
-              <img src={selectedPhotos[2]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-            </div>
-            <div style={{ borderRadius: 12, overflow: "hidden", gridColumn: "1 / 3" }}>
-              <img src={selectedPhotos[3]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", aspectRatio: "2.2/1" }} />
             </div>
           </div>
         </section>
