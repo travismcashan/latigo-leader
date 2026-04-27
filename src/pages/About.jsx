@@ -65,7 +65,7 @@ export default function About() {
             fontWeight: 700, color: "#FAF8F5", lineHeight: 1.1,
             margin: "0 0 1.2rem 0",
           }}>
-            The Story Behind the Strap
+            The Story Behind<br />the Strap
           </h1>
           <p style={{
             fontFamily: "'Inter', sans-serif",
