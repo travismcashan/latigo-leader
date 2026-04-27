@@ -287,7 +287,7 @@ export default function Team() {
               marginBottom: "2.5rem",
             }}>
               <div style={{ borderRadius: 8, overflow: "hidden" }}>
-                <img src="/images/lifeplan-section.jpg" alt="LifePlan facilitation session" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+                <img src="/images/lifeplan-section.jpg" alt="LifePlan facilitation session" style={{ width: "115%", height: "115%", objectFit: "cover", objectPosition: "top left", display: "block" }} />
               </div>
               <div style={{ borderRadius: 8, overflow: "hidden" }}>
                 <img src="/images/jared-lifeplan.jpg" alt="Jared facilitating a LifePlan session" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
