@@ -11,7 +11,7 @@ export const PAGES = {
     "home": Home,
     "about": About,
     "services": Services,
-    "team": Team,
+    "lifeplan": Team,
     "contact": Contact,
     "results": Results,
     "thankyou": ThankYou,

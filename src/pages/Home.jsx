@@ -420,7 +420,7 @@ export default function Home() {
                 LifePlan is a two-day personal intensive designed for leaders who have achieved a lot — but aren't sure they're headed in the right direction. Through a guided process covering five life domains, you'll uncover purpose, name what's been holding you back, and build a strategic plan for the most important organization you'll ever lead — your own life.
               </p>
               {(
-                <Link to={createPageUrl("Team")} style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(1rem, 1.6vw, 1.2rem)", color: "#bf9f4b", textDecoration: "underline", fontWeight: 500 }}>
+                <Link to={createPageUrl("lifeplan")} style={{ fontFamily: "'Inter', sans-serif", fontSize: "clamp(1rem, 1.6vw, 1.2rem)", color: "#bf9f4b", textDecoration: "underline", fontWeight: 500 }}>
                   Explore LifePlan →
                 </Link>
               )}
