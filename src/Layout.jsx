@@ -114,12 +114,12 @@ export default function Layout({ children, currentPageName }) {
         [data-theme="copper"] img:not([alt="Latigo"]):not([alt="Altrua HealthShare"]):not([data-no-tint]),
         [data-theme="copper"] video:not([data-no-tint]),
         [data-theme="copper"] .hero-bg {
-          filter: sepia(25%) saturate(90%) brightness(98%);
+          filter: sepia(15%) saturate(90%) brightness(98%);
         }
         [data-theme="teal"] img:not([alt="Latigo"]):not([alt="Altrua HealthShare"]):not([data-no-tint]),
         [data-theme="teal"] video:not([data-no-tint]),
         [data-theme="teal"] .hero-bg {
-          filter: sepia(20%) saturate(80%) brightness(96%);
+          filter: sepia(12%) saturate(80%) brightness(96%);
         }
 
         .clove-nav-link {
