@@ -243,7 +243,7 @@ export default function Home() {
 
       {/* ── 2. OUR APPROACH ── centered, cream bg */}
       <FadeInOnScroll>
-      <section style={{ background: "#FAF8F5", padding: "8vw 4vw", textAlign: "center" }}>
+      <section style={{ background: "#FAF8F5", padding: "6vw 4vw", textAlign: "center" }}>
         <div style={{ maxWidth: 860, margin: "0 auto" }}>
           <h2 style={{
             fontFamily: "'DM Sans', sans-serif",
@@ -365,7 +365,7 @@ export default function Home() {
 
       {/* ── 4. STRATEGIC PLANNING — image left, text right ── */}
       <FadeInOnScroll>
-      <section style={{ background: "transparent", padding: "8vw 4vw" }}>
+      <section style={{ background: "transparent", padding: "6vw 4vw" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <div className="float-block" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4vw", alignItems: "center" }}>
             <div style={{ overflow: "hidden", aspectRatio: "5/4" }}>
@@ -402,7 +402,7 @@ export default function Home() {
 
       {/* ── 5. LIFEPLAN — text left, image right ── */}
       <FadeInOnScroll>
-      <section style={{ background: "#FAF8F5", padding: "8vw 4vw" }}>
+      <section style={{ background: "#FAF8F5", padding: "6vw 4vw" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <div className="float-block lifeplan-block" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4vw", alignItems: "center" }}>
             <div style={{ padding: "3vw 2vw" }}>
@@ -439,7 +439,7 @@ export default function Home() {
 
       {/* ── 6. HOW WE WORK ── themed */}
       <FadeInOnScroll>
-      <section style={{ background: theme === "teal" ? "#2A5C5A" : "#EDE9E3", padding: "8vw 4vw" }}>
+      <section style={{ background: theme === "teal" ? "#2A5C5A" : "#EDE9E3", padding: "6vw 4vw" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <div style={{ textAlign: "center", paddingBottom: 70 }}>
             <h2 style={{
@@ -532,7 +532,7 @@ export default function Home() {
 
       {/* ── 8. MEET THE GUIDES ── cream */}
       <FadeInOnScroll>
-      <section style={{ background: "#FAF8F5", padding: "8vw 4vw" }}>
+      <section style={{ background: "#FAF8F5", padding: "6vw 4vw" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <div style={{ textAlign: "center", paddingBottom: 70 }}>
             <h2 style={{
@@ -611,7 +611,7 @@ export default function Home() {
       {/* ── 9. BOTTOM CTA ── thematic */}
       <FadeInOnScroll>
       <section style={{ 
-        padding: "8vw 4vw",
+        padding: "6vw 4vw",
         textAlign: "center",
         position: "relative",
         overflow: "hidden"

@@ -132,7 +132,7 @@ export default function Services() {
         <div className="hero-content" style={{
           position: "relative",
           zIndex: 1,
-          padding: "8vw 4vw",
+          padding: "6vw 4vw",
           maxWidth: 700,
         }}>
           <p style={{
@@ -171,7 +171,7 @@ export default function Services() {
 
       {/* -- 2. INTRO TEXT -- */}
       <FadeInOnScroll>
-        <section style={{ background: "#FAF8F5", padding: "8vw 4vw", textAlign: "center" }}>
+        <section style={{ background: "#FAF8F5", padding: "6vw 4vw", textAlign: "center" }}>
           <div style={{ maxWidth: 860, margin: "0 auto" }}>
             <p style={{
               fontSize: "clamp(1rem, 1.6vw, 1.2rem)",
@@ -196,7 +196,7 @@ export default function Services() {
 
       {/* -- 3. THE SIX PHASES -- */}
       <FadeInOnScroll>
-        <section style={{ background: "#FFFFFF", padding: "8vw 4vw" }}>
+        <section style={{ background: "#FFFFFF", padding: "6vw 4vw" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -260,7 +260,7 @@ export default function Services() {
 
       {/* -- 4. WHAT STRATOP PRODUCES -- */}
       <FadeInOnScroll>
-        <section style={{ background: "#FAF8F5", padding: "8vw 4vw", textAlign: "center" }}>
+        <section style={{ background: "#FAF8F5", padding: "6vw 4vw", textAlign: "center" }}>
           <div style={{ maxWidth: 860, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -323,7 +323,7 @@ export default function Services() {
 
       {/* -- 5. WHO STRATOP SERVES -- */}
       <FadeInOnScroll>
-        <section style={{ background: "#FFFFFF", padding: "8vw 4vw" }}>
+        <section style={{ background: "#FFFFFF", padding: "6vw 4vw" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -405,7 +405,7 @@ export default function Services() {
       <FadeInOnScroll>
         <section style={{
           background: currentColors.primary,
-          padding: "8vw 4vw",
+          padding: "6vw 4vw",
           textAlign: "center",
         }}>
           <div style={{ maxWidth: 860, margin: "0 auto" }}>

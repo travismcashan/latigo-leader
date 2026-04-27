@@ -111,7 +111,7 @@ export default function Contact() {
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", color: "#1A1A1A", background: "#FAF8F5", minHeight: "100vh" }}>
       <FadeInOnScroll>
-        <section style={{ maxWidth: 1200, margin: "0 auto", padding: "max(100px, 12vw) 4vw 8vw 4vw" }}>
+        <section style={{ maxWidth: 1200, margin: "0 auto", padding: "max(100px, 12vw) 4vw 6vw 4vw" }}>
           <div
             className="contact-grid"
             style={{

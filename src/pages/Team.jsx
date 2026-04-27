@@ -99,7 +99,7 @@ export default function Team() {
           position: "relative",
           zIndex: 1,
           textAlign: "left",
-          padding: "8vw 4vw",
+          padding: "6vw 4vw",
           maxWidth: 1400,
           width: "100%",
         }}>
@@ -139,7 +139,7 @@ export default function Team() {
 
       {/* 2. INTRO TEXT */}
       <FadeInOnScroll>
-        <section style={{ background: "#FAF8F5", padding: "8vw 4vw", textAlign: "center" }}>
+        <section style={{ background: "#FAF8F5", padding: "6vw 4vw", textAlign: "center" }}>
           <div style={{ maxWidth: 860, margin: "0 auto" }}>
             <p style={{
               fontSize: "clamp(1rem, 1.6vw, 1.15rem)",
@@ -164,7 +164,7 @@ export default function Team() {
 
       {/* 3. FIVE DOMAINS */}
       <FadeInOnScroll>
-        <section style={{ background: "#FFFFFF", padding: "8vw 4vw" }}>
+        <section style={{ background: "#FFFFFF", padding: "6vw 4vw" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -264,7 +264,7 @@ export default function Team() {
 
       {/* 4. WHAT LIFEPLAN PRODUCES */}
       <FadeInOnScroll>
-        <section style={{ background: "#FAF8F5", padding: "8vw 4vw", textAlign: "center" }}>
+        <section style={{ background: "#FAF8F5", padding: "6vw 4vw", textAlign: "center" }}>
           <div style={{ maxWidth: 860, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -320,7 +320,7 @@ export default function Team() {
 
       {/* 5. WHO IT'S FOR */}
       <FadeInOnScroll>
-        <section style={{ background: "#FFFFFF", padding: "8vw 4vw", textAlign: "center" }}>
+        <section style={{ background: "#FFFFFF", padding: "6vw 4vw", textAlign: "center" }}>
           <div style={{ maxWidth: 860, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -354,7 +354,7 @@ export default function Team() {
 
       {/* 6. TESTIMONIALS */}
       <FadeInOnScroll>
-        <section style={{ background: "#c5d0d6", padding: "8vw 4vw" }}>
+        <section style={{ background: "#c5d0d6", padding: "6vw 4vw" }}>
           <div style={{
             maxWidth: 860,
             margin: "0 auto",
@@ -394,7 +394,7 @@ export default function Team() {
       <FadeInOnScroll>
         <section style={{
           background: primary,
-          padding: "8vw 4vw",
+          padding: "6vw 4vw",
           textAlign: "center",
           transition: "background 0.3s ease",
         }}>

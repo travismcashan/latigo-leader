@@ -67,7 +67,7 @@ export default function Results() {
 
       {/* -- 2. ALTRUA HEALTHSHARE FEATURE -- */}
       <FadeInOnScroll>
-        <section style={{ background: c.primary, padding: "8vw 4vw", textAlign: "center" }}>
+        <section style={{ background: c.primary, padding: "6vw 4vw", textAlign: "center" }}>
           <div style={{ maxWidth: 860, margin: "0 auto" }}>
             <img
               src="/images/altrua-logo.png"
@@ -171,7 +171,7 @@ export default function Results() {
 
       {/* -- 3. LIFEPLAN TESTIMONIALS -- */}
       <FadeInOnScroll>
-        <section style={{ background: "#c5d0d6", padding: "8vw 4vw", textAlign: "center" }}>
+        <section style={{ background: "#c5d0d6", padding: "6vw 4vw", textAlign: "center" }}>
           <div style={{ maxWidth: 860, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -223,7 +223,7 @@ export default function Results() {
 
       {/* -- 4. TRANSFORMATION IN ACTION -- */}
       <FadeInOnScroll>
-        <section style={{ background: "#FAF8F5", padding: "8vw 4vw", textAlign: "center" }}>
+        <section style={{ background: "#FAF8F5", padding: "6vw 4vw", textAlign: "center" }}>
           <div style={{ maxWidth: 860, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -285,7 +285,7 @@ export default function Results() {
 
       {/* -- 5. CTA -- */}
       <FadeInOnScroll>
-        <section style={{ background: c.primary, padding: "8vw 4vw", textAlign: "center" }}>
+        <section style={{ background: c.primary, padding: "6vw 4vw", textAlign: "center" }}>
           <div style={{ maxWidth: 860, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",

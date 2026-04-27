@@ -57,7 +57,7 @@ export default function About() {
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.55)" }} />
         <div style={{
           position: "relative", zIndex: 1, textAlign: "center",
-          padding: "8vw 4vw", maxWidth: 900, margin: "0 auto",
+          padding: "6vw 4vw", maxWidth: 900, margin: "0 auto",
         }}>
           <h1 style={{
             fontFamily: "'DM Sans', sans-serif",
@@ -80,7 +80,7 @@ export default function About() {
 
       {/* -- THE METAPHOR -- */}
       <FadeInOnScroll>
-        <section style={{ background: "#FAF8F5", padding: "8vw 4vw" }}>
+        <section style={{ background: "#FAF8F5", padding: "6vw 4vw" }}>
           <div className="metaphor-block" style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5vw", alignItems: "center" }}>
             <div>
               <div style={{ overflow: "hidden", borderRadius: 8 }}>
@@ -117,7 +117,7 @@ export default function About() {
 
       {/* -- PERSPECTIVE BEFORE PLANNING -- */}
       <FadeInOnScroll>
-        <section style={{ background: "#FFFFFF", padding: "8vw 4vw", textAlign: "center" }}>
+        <section style={{ background: "#FFFFFF", padding: "6vw 4vw", textAlign: "center" }}>
           <div style={{ maxWidth: 860, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -147,7 +147,7 @@ export default function About() {
 
       {/* -- MEET THE FOUNDERS -- */}
       <FadeInOnScroll>
-        <section style={{ background: "#FAF8F5", padding: "8vw 4vw" }}>
+        <section style={{ background: "#FAF8F5", padding: "6vw 4vw" }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <div style={{ textAlign: "center", paddingBottom: 70 }}>
               <h2 style={{
@@ -253,7 +253,7 @@ export default function About() {
 
       {/* -- BUILT ON A PROVEN FOUNDATION -- */}
       <FadeInOnScroll>
-        <section style={{ background: "#FFFFFF", padding: "8vw 4vw", textAlign: "center" }}>
+        <section style={{ background: "#FFFFFF", padding: "6vw 4vw", textAlign: "center" }}>
           <div style={{ maxWidth: 860, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -298,7 +298,7 @@ export default function About() {
       {/* -- CTA -- */}
       <FadeInOnScroll>
         <section style={{
-          background: c.primary, padding: "8vw 4vw", textAlign: "center",
+          background: c.primary, padding: "6vw 4vw", textAlign: "center",
         }}>
           <div style={{ maxWidth: 1400, margin: "0 auto" }}>
             <h2 style={{
