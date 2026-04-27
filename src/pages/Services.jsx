@@ -303,28 +303,29 @@ export default function Services() {
         </section>
       </FadeInOnScroll>
 
-      {/* -- PHOTO STRIP -- */}
+      {/* -- PHOTO MONTAGE -- */}
       <FadeInOnScroll>
-        <section style={{ padding: "0", overflow: "hidden" }}>
+        <section style={{ padding: "4vw 4vw 0", overflow: "hidden" }}>
           <div style={{
             display: "grid",
-            gridTemplateColumns: "repeat(5, 1fr)",
-            gap: "4px",
+            gridTemplateColumns: "1fr 1fr 1.2fr",
+            gridTemplateRows: "1fr 1fr",
+            gap: "12px",
+            maxWidth: 1200,
+            margin: "0 auto",
           }}>
-            {selectedPhotos.map((src, idx) => (
-              <div key={idx} style={{ aspectRatio: "16/10", overflow: "hidden" }}>
-                <img
-                  src={src}
-                  alt=""
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
-                  }}
-                />
-              </div>
-            ))}
+            <div style={{ borderRadius: 12, overflow: "hidden" }}>
+              <img src={selectedPhotos[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", aspectRatio: "4/3" }} />
+            </div>
+            <div style={{ borderRadius: 12, overflow: "hidden" }}>
+              <img src={selectedPhotos[1]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", aspectRatio: "4/3" }} />
+            </div>
+            <div style={{ borderRadius: 12, overflow: "hidden", gridRow: "1 / 3" }}>
+              <img src={selectedPhotos[2]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            </div>
+            <div style={{ borderRadius: 12, overflow: "hidden", gridColumn: "1 / 3" }}>
+              <img src={selectedPhotos[3]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", aspectRatio: "2.2/1" }} />
+            </div>
           </div>
         </section>
       </FadeInOnScroll>

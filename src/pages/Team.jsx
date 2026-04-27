@@ -91,7 +91,7 @@ export default function Team() {
         minHeight: "60vh",
         display: "flex",
         alignItems: "flex-end",
-        backgroundImage: "url('/images/lifeplan-section.jpg')",
+        backgroundImage: "url('/images/lifeplan-wall.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -281,8 +281,8 @@ export default function Team() {
             </h2>
             <div style={{ overflow: "hidden", borderRadius: 8, marginBottom: "2.5rem" }}>
               <img
-                src="/images/lifeplan-wall.jpg"
-                alt="LifePlan session wall with Turning Points, Core Values, and objectives"
+                src="/images/lifeplan-section.jpg"
+                alt="LifePlan facilitation session"
                 style={{ width: "100%", height: "auto", display: "block" }}
               />
             </div>

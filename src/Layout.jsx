@@ -103,6 +103,10 @@ export default function Layout({ children, currentPageName }) {
           background: #FAF8F5;
         }
 
+        main img:not([alt="Latigo"]) {
+          filter: sepia(8%) saturate(90%) brightness(100%);
+        }
+
         .clove-nav-link {
           font-family: 'Inter', sans-serif;
           font-size: 0.95rem;
