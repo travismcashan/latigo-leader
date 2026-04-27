@@ -281,16 +281,16 @@ export default function Services() {
               gap: "16px",
               marginBottom: "2.5rem",
             }}>
-              <div style={{ borderRadius: 16, overflow: "hidden", minHeight: 0 }}>
+              <div style={{ borderRadius: 8, overflow: "hidden", minHeight: 0 }}>
                 <img src={selectedPhotos[0]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
-              <div style={{ borderRadius: 16, overflow: "hidden", minHeight: 0 }}>
+              <div style={{ borderRadius: 8, overflow: "hidden", minHeight: 0 }}>
                 <img src={selectedPhotos[1]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
-              <div style={{ borderRadius: 16, overflow: "hidden", minHeight: 0, gridRow: "1 / 3" }}>
+              <div style={{ borderRadius: 8, overflow: "hidden", minHeight: 0, gridRow: "1 / 3" }}>
                 <img src={selectedPhotos[2]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
-              <div style={{ borderRadius: 16, overflow: "hidden", minHeight: 0, gridColumn: "1 / 3" }}>
+              <div style={{ borderRadius: 8, overflow: "hidden", minHeight: 0, gridColumn: "1 / 3" }}>
                 <img src={selectedPhotos[3]} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               </div>
             </div>
