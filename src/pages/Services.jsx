@@ -277,7 +277,7 @@ export default function Services() {
             <div style={{
               display: "grid",
               gridTemplateColumns: "1.2fr 1fr 1fr",
-              gridTemplateRows: "160px 160px",
+              gridTemplateRows: "192px 192px",
               gap: "12px",
               marginBottom: "2.5rem",
             }}>
