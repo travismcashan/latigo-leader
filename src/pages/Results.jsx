@@ -165,21 +165,17 @@ export default function Results() {
                 CEO, Altrua HealthShare
               </p>
             </div>
-          </div>
-        </section>
-      </FadeInOnScroll>
-
-      {/* -- ALTRUA PHOTO GALLERY -- */}
-      <FadeInOnScroll>
-        <section style={{ background: "#FAF8F5", padding: "6vw 4vw" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            {/* Photo gallery */}
             <div className="altrua-gallery" style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "16px",
+              gap: "8px",
+              marginTop: "3rem",
+              maxWidth: 700,
+              margin: "3rem auto 0",
             }}>
               {[1,2,3,4,5,6,7,8,9].map(n => (
-                <div key={n} style={{ borderRadius: 8, overflow: "hidden" }}>
+                <div key={n} style={{ borderRadius: 6, overflow: "hidden" }}>
                   <img
                     src={`/images/altrua-gallery/${String(n).padStart(2,"0")}.jpg`}
                     alt=""
