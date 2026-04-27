@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import FadeInOnScroll from "@/components/FadeInOnScroll";
@@ -56,6 +56,23 @@ export default function Services() {
   };
 
   const currentColors = colors[theme];
+
+  const allPhotos = [
+    "/images/stratop-photos/01.jpg",
+    "/images/stratop-photos/02.jpg",
+    "/images/stratop-photos/03.jpg",
+    "/images/stratop-photos/04.jpg",
+    "/images/stratop-photos/05.jpg",
+    "/images/stratop-photos/06.jpg",
+    "/images/stratop-photos/07.jpg",
+    "/images/stratop-photos/08.jpg",
+    "/images/stratop-photos/09.jpg",
+    "/images/stratop-photos/10.jpg",
+  ];
+  const selectedPhotos = useMemo(() => {
+    const shuffled = [...allPhotos].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 5);
+  }, []);
 
   const phases = [
     {
@@ -282,6 +299,32 @@ export default function Services() {
                 </p>
               ))}
             </div>
+          </div>
+        </section>
+      </FadeInOnScroll>
+
+      {/* -- PHOTO STRIP -- */}
+      <FadeInOnScroll>
+        <section style={{ padding: "0", overflow: "hidden" }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(5, 1fr)",
+            gap: "4px",
+          }}>
+            {selectedPhotos.map((src, idx) => (
+              <div key={idx} style={{ aspectRatio: "16/10", overflow: "hidden" }}>
+                <img
+                  src={src}
+                  alt=""
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    display: "block",
+                  }}
+                />
+              </div>
+            ))}
           </div>
         </section>
       </FadeInOnScroll>
