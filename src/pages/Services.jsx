@@ -133,7 +133,7 @@ export default function Services() {
           position: "relative",
           zIndex: 1,
           padding: "6vw 4vw",
-          maxWidth: 700,
+          maxWidth: 900,
         }}>
           <p style={{
             fontFamily: "'Inter', sans-serif",
