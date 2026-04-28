@@ -72,7 +72,6 @@ export default function Team() {
     "/images/wall-of-fame/11b.jpg",
     "/images/wall-of-fame/12b.jpg",
     "/images/wall-of-fame/13b.jpg",
-    "/images/wall-of-fame/14b.jpg",
   ];
 
   const montagePhotos = useMemo(() => {
