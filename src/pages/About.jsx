@@ -148,7 +148,7 @@ export default function About() {
       {/* -- MEET THE FOUNDERS -- */}
       <FadeInOnScroll>
         <section style={{ background: "#FAF8F5", padding: "6vw 4vw" }}>
-          <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
             <div style={{ textAlign: "center", paddingBottom: 70 }}>
               <h2 style={{
                 fontFamily: "'DM Sans', sans-serif",

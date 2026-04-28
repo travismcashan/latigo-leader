@@ -191,7 +191,7 @@ export default function Results() {
       {/* -- 3. LIFEPLAN TESTIMONIALS -- */}
       <FadeInOnScroll>
         <section style={{ background: "#c5d0d6", padding: "6vw 4vw" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ maxWidth: 1000, margin: "0 auto" }}>
             <h2 style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)",
