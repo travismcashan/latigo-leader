@@ -89,7 +89,6 @@ export default function About() {
                   alt="A latigo strap securing a saddle"
                   style={{
                     width: "100%", height: "auto", display: "block",
-                    filter: "grayscale(100%) contrast(1.1) brightness(0.95)",
                   }}
                 />
               </div>

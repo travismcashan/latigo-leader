@@ -68,9 +68,17 @@ export default function Team() {
     { a: "/images/wall-of-fame/10a.jpg", b: "/images/wall-of-fame/10b.jpg" },
   ];
 
+  const standaloneBPhotos = [
+    "/images/wall-of-fame/11b.jpg",
+    "/images/wall-of-fame/12b.jpg",
+    "/images/wall-of-fame/13b.jpg",
+    "/images/wall-of-fame/14b.jpg",
+  ];
+
   const montagePhotos = useMemo(() => {
     const aPhotos = wallOfFame.map(p => p.a).sort(() => Math.random() - 0.5);
-    const allPhotos = wallOfFame.flatMap(p => [p.a, p.b]).sort(() => Math.random() - 0.5);
+    const bPhotos = [...wallOfFame.map(p => p.b), ...standaloneBPhotos];
+    const allPhotos = [...wallOfFame.flatMap(p => [p.a, p.b]), ...standaloneBPhotos].sort(() => Math.random() - 0.5);
     return [
       aPhotos[0],       // tall left — room shot only
       allPhotos[0],     // top right square — either works
@@ -414,6 +422,15 @@ export default function Team() {
                     />
                   </div>
                 </React.Fragment>
+              ))}
+              {standaloneBPhotos.map((src, idx) => (
+                <div key={`standalone-${idx}`} style={{ borderRadius: 8, overflow: "hidden" }}>
+                  <img
+                    src={src}
+                    alt=""
+                    style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", objectPosition: "center top", display: "block" }}
+                  />
+                </div>
               ))}
             </div>
           </div>
